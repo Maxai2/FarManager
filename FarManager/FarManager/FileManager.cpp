@@ -1,12 +1,6 @@
 #include "FileManager.h"
 
-
-
-FileManager::FileManager()
+FileManager::FileManager(string path = "C:\\")
 {
-}
-
-
-FileManager::~FileManager()
-{
+	this->path = path;
 }
