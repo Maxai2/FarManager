@@ -19,7 +19,7 @@ public:
 	////Name:			Size:		Type:		Attr:
 	////--------------------------------------------
 	////..
-	////Folder1		15Mb		dir			NH
+	////Folder1			15Mb		dir			NH
 	////1.txt			123b		file		RS
 	////--------------------------------------------
 	////Files: 1	Folders: 1	Size: 15Mb
