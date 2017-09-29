@@ -13,7 +13,6 @@ Functions::~Functions()
 
 
 #include <iostream>
-#include "DrawFunctions.h"
 
 using namespace std;
 

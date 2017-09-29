@@ -3,7 +3,6 @@
 #include <direct.h>
 #include <io.h>
 
-#include "DrawFunctions.h"
 #include "FileManager.h"
 
 using namespace std;
