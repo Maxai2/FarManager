@@ -12,7 +12,7 @@ using namespace std;
 
 void main()
 {
-	head();
+//	head();
 
 
 
