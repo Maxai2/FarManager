@@ -1,16 +1,10 @@
 #pragma once
-
-class Functions
-{
-public:
-	Functions();
-	~Functions();
-};
-
-
-#pragma once
-
 #include <Windows.h>
+#include <iostream>
+#include <direct.h>
+#include <iomanip>
+
+using namespace std;
 
 enum Colors
 {
@@ -41,5 +35,11 @@ enum Colors
 #define defaultColor	  Colors::GREY
 #define defaultBackGround Colors::BLACK
 
-void line(int x, int y, int length, Colors color);
-void head();
+class Functions
+{
+	void line(int x, int y, int length, Colors color, int direction);
+
+public:
+	Functions();
+	void head();
+};
