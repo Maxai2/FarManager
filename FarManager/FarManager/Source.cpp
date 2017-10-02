@@ -11,9 +11,15 @@ using namespace std;
 
 void main()
 {
-//	head();
+	//head();
 
-
+	//Name:			Size:		Type:		Attr:
+	//--------------------------------------------
+	//..
+	//Folder1		15Mb		dir			NH
+	//1.txt			123b		file		RS
+	//--------------------------------------------
+	//Files: 1	Folders: 1	Size: 15Mb
 
 	//FileManager fm("C:\\Windows\\System32\\");
 	//fm.find("*.txt");
