@@ -20,4 +20,6 @@ public:
 	//void changeDirectory(string dir);
 	//void remove(string path);
 	//void rename(string path, string name);
+	//void copy(string oldpath, string newpath);
+	//void move()
 };

@@ -12,12 +12,12 @@ using namespace std;
 
 void main()
 {
-	//head();
-
 	Functions f;
 	f.head();
 	
 	system("pause");
+
+
 	//Name:			Size:		Type:		Attr:
 	//--------------------------------------------
 	//..

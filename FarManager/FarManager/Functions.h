@@ -1,10 +1,11 @@
 #pragma once
 #include <Windows.h>
 #include <iostream>
-#include <direct.h>
 #include <iomanip>
 
 using namespace std;
+
+//HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 enum Colors
 {
@@ -26,20 +27,38 @@ enum Colors
 	WHITE
 };
 
+enum StartCoord
+{
+	startX = 0,
+	startY = 0,
+	headX = 2,
+	headY = 2
+};
+
+enum Console
+{
+	fontSize = 20,
+	consoleWidth = 170,
+	consoleHeight = 50
+};
+
+#define defaultForeGround Colors::GREY
+#define defaultBackGround Colors::BLACK
+
+
 #define COLOR(foreground, background) SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), background * 16 + foreground)
 #define COORDS(row, col) SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { (short)col, (short)row })
 #define RAND(min, max) rand() % (max - min + 1) + min
 
-#define headX 2
-#define headY 2
-#define defaultColor	  Colors::GREY
-#define defaultBackGround Colors::BLACK
-
 class Functions
 {
 	void line(int x, int y, int length, Colors color, int direction);
+	void square();
+	void frame();
+	void background();
 
 public:
 	Functions();
+	~Functions();
 	void head();
 };
