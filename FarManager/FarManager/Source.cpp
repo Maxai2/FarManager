@@ -2,6 +2,7 @@
 #include <string>
 #include <direct.h>
 #include <io.h>
+#include <conio.h>
 
 #include "FileManager.h"
 #include "Functions.h"
@@ -15,8 +16,7 @@ void main()
 	Functions f;
 	f.head();
 	
-	system("pause");
-
+	_getch();
 
 	//Name:			Size:		Type:		Attr:
 	//--------------------------------------------

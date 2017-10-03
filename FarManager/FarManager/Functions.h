@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <iostream>
 #include <iomanip>
+#include <string>
 
 using namespace std;
 
@@ -31,19 +32,19 @@ enum StartCoord
 {
 	startX = 0,
 	startY = 0,
-	headX = 2,
-	headY = 2
+	headX = 1,
+	headY = 1
 };
 
 enum Console
 {
 	fontSize = 20,
 	consoleWidth = 170,
-	consoleHeight = 50
+	consoleHeight = 90
 };
 
 #define defaultForeGround Colors::GREY
-#define defaultBackGround Colors::BLACK
+#define defaultBackGround Colors::DARKBLUE
 
 
 #define COLOR(foreground, background) SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), background * 16 + foreground)
