@@ -1,8 +1,17 @@
 #include "Functions.h"
 
+//--------------------------------------------------------------------------------------------------------
+
 Functions::Functions(){}
 
-Functions::~Functions(){}
+//--------------------------------------------------------------------------------------------------------
+
+Functions::~Functions()
+{
+	COLOR(defaultForeGround, Colors::BLACK);
+}
+
+//--------------------------------------------------------------------------------------------------------
 
 void Functions::line(int x, int y, int length, Colors color, int direction)
 {
@@ -12,9 +21,9 @@ void Functions::line(int x, int y, int length, Colors color, int direction)
 	switch (direction)
 	{
 		case 6:
-			for (int i = 0; i < length; i++)
+			for (int i = 0; i < length + 20; i++)
 			{
-				if (i == 62 || i == 69 || i == 76)
+				if (i == Place::Size || i == Place::Type || i == Place::Attr)
 					cout << (char)193;
 				else
 					cout << (char)196;
@@ -32,6 +41,8 @@ void Functions::line(int x, int y, int length, Colors color, int direction)
 	COLOR(color, defaultBackGround);
 }
 
+//--------------------------------------------------------------------------------------------------------
+
 void Functions::square()
 {
 	COORDS(StartCoord::startX, StartCoord::startY);
@@ -43,7 +54,7 @@ void Functions::square()
 
 		for (int i = 0; i < Console::consoleWidth / 2 - 2; i++)
 		{
-			if (i == 62 || i == 69 || i == 76)
+			if (i == Place::Size || i == Place::Type || i == Place::Attr)
 				cout << (char)209;
 			else
 				cout << (char)205;
@@ -54,12 +65,14 @@ void Functions::square()
 	
 	for (int i = 0; i < Console::consoleHeight - 2; i++)
 	{
-		i == 84 ? cout << (char)199 : cout << (char)186;
+		//i == Console::consoleHeight - 5 ? cout << (char)199 : cout << (char)186;
+		cout << (char)186;
 
 		for (int j = 0; j < Console::consoleWidth / 2 - 2; j++)
 			cout << " ";
 
-		i == 84 ? cout << (char)182 : cout << (char)186;
+		//i == Console::consoleHeight - 5 ? cout << (char)182 : cout << (char)186;
+		cout << (char)186;
 	}
 
 	for (int i = 0; i < 2; i++)
@@ -75,7 +88,25 @@ void Functions::square()
 	COLOR(defaultForeGround, defaultBackGround);
 }
 
+//--------------------------------------------------------------------------------------------------------
+
 void Functions::background(){ COLOR(defaultForeGround, Colors::DARKBLUE);}
+
+//--------------------------------------------------------------------------------------------------------
+
+bool frac(float num)
+{
+	int temp = 0;
+
+	temp = (int)num;
+
+	if (temp == num)
+		return false;
+	else
+		return true;
+}
+
+//--------------------------------------------------------------------------------------------------------
 
 void Functions::frame()
 {
@@ -93,26 +124,83 @@ void Functions::frame()
 	SetConsoleScreenBufferSize(GetStdHandle(STD_OUTPUT_HANDLE), bufferSize);
 }
 
+//--------------------------------------------------------------------------------------------------------
+
 void Functions::head()
 {
 	background(); frame(); square();
 
-	for (short i = 0; i < 150; i += 85)
+	for (short i = 0; i < Console::consoleWidth; i += Console::consoleWidth / 2)
 	{
 		COLOR(Colors::YELLOW, defaultBackGround);
 		COORDS(StartCoord::headY, StartCoord::headX + 20 + i);
 		cout << "Name";
-		line(StartCoord::headX + 62 + i, StartCoord::headY, Console::consoleHeight / 2 - 3, Colors::YELLOW, 2);
-		COORDS(StartCoord::headY, StartCoord::headX + 64 + i);
+		line(StartCoord::headX + Place::Size + i, StartCoord::headY, Console::consoleHeight / 2 - 3, Colors::YELLOW, 2);
+		COORDS(StartCoord::headY, StartCoord::headX + Place::Size + 2 + i);
 		cout << "Size";
-		line(StartCoord::headX + 69 + i, StartCoord::headY, Console::consoleHeight / 2 - 3, Colors::YELLOW, 2);
-		COORDS(StartCoord::headY, StartCoord::headX + 71 + i);
+		line(StartCoord::headX + Place::Type + i, StartCoord::headY, Console::consoleHeight / 2 - 3, Colors::YELLOW, 2);
+		COORDS(StartCoord::headY, StartCoord::headX + Place::Type + 2 + i);
 		cout << "Type";
-		line(StartCoord::headX + 76 + i, StartCoord::headY, Console::consoleHeight / 2 - 3, Colors::YELLOW, 2);
-		COORDS(StartCoord::headY, StartCoord::headX + 78 + i);
+		line(StartCoord::headX + Place::Attr + i, StartCoord::headY, Console::consoleHeight / 2 - 3, Colors::YELLOW, 2);
+		COORDS(StartCoord::headY, StartCoord::headX + Place::Attr + 2 + i);
 		cout << "Attr";
 
-		line(StartCoord::headX + i, Console::consoleHeight / 2 - 2, Console::consoleHeight - 7, defaultForeGround, 6);
+//		line(StartCoord::headX + i, Console::consoleHeight / 2 - 2, Console::consoleHeight / 2, defaultForeGround, 6);
 	}
-	
 }
+
+//--------------------------------------------------------------------------------------------------------
+
+void move()
+{
+	//FileManager fm();
+	//int sel = 0;
+	//int count = fm
+	//FileManager::showDirectory(sel);
+}
+
+//--------------------------------------------------------------------------------------------------------
+
+void BytesConv(float size)
+{
+	float tb = 1099511627776;
+	float gb = 1073741824;
+	float mb = 1048576;
+	float kb = 1024;
+
+	float ans = 0;
+	//sprintf("%.2f TB", size / tb);
+
+	//if (frac(ans))
+	//	cout << "~ " << int(ans) << " TB";
+	//else
+	//	cout << ans << " TB";
+
+	if (size >= tb)
+	{
+		ans = size / tb;
+
+		frac(ans) ? (cout << "~ " << int(ans) << "TB") : (cout << " " << ans << "TB");
+	}
+	else if (size >= gb && size < tb)
+	{
+		ans = size / gb;
+
+		frac(ans) ? (cout << "~ " << int(ans) << "GB") : (cout << " " << ans << "GB");
+	}
+	else if (size >= mb && size < gb)
+	{
+		ans = size / mb;
+
+		frac(ans) ? (cout << "~ " << int(ans) << "MB") : (cout << " " << ans << "MB");
+	}
+	else if (size >= kb && size < mb)
+	{
+		ans = size / kb;
+
+		frac(ans) ? (cout << "~ " << int(ans) << "TB") : (cout << " " << ans << "TB");
+	}
+	else
+		frac(ans) ? (cout << "~ " << int(ans) << "B") : (cout << " " << ans << "B");
+}
+

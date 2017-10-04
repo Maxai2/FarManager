@@ -3,10 +3,17 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <math.h>
+
+#include "FileManager.h"
+
+//--------------------------------------------------------------------------------------------------------
 
 using namespace std;
 
 //HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+
+//--------------------------------------------------------------------------------------------------------
 
 enum Colors
 {
@@ -38,10 +45,19 @@ enum StartCoord
 
 enum Console
 {
-	fontSize = 20,
-	consoleWidth = 170,
-	consoleHeight = 90
+//	fontSize = 10,
+	consoleWidth = 150,
+	consoleHeight = 68
 };
+
+enum Place
+{
+	Size = 50,
+	Type = 58,
+	Attr = 66
+};
+
+//--------------------------------------------------------------------------------------------------------
 
 #define defaultForeGround Colors::GREY
 #define defaultBackGround Colors::DARKBLUE
@@ -49,7 +65,9 @@ enum Console
 
 #define COLOR(foreground, background) SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), background * 16 + foreground)
 #define COORDS(row, col) SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { (short)col, (short)row })
-#define RAND(min, max) rand() % (max - min + 1) + min
+//#define RAND(min, max) rand() % (max - min + 1) + min
+
+//--------------------------------------------------------------------------------------------------------
 
 class Functions
 {
@@ -57,9 +75,12 @@ class Functions
 	void square();
 	void frame();
 	void background();
+	friend bool frac(float num);
 
 public:
 	Functions();
 	~Functions();
 	void head();
+	friend void BytesConv(float size);
+	friend void move();
 };
