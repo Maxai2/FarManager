@@ -20,8 +20,16 @@ void main()
 
 	FileManager fm("C://*");
 
-	fm.showDirectory();
+	fm.showDirectory(0);
 
-	_getch();
+	int temp = 0;
+	while(1)
+	{
+		temp = f.move(fm.getCount());
+		system("cls");
+		fm.showDirectory(0);
+		_getch();	
+	}
+
 
 }

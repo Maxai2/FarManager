@@ -151,12 +151,33 @@ void Functions::head()
 
 //--------------------------------------------------------------------------------------------------------
 
-void move()
+int Functions::move(int count)
 {
-	//FileManager fm();
-	//int sel = 0;
-	//int count = fm
-	//FileManager::showDirectory(sel);
+	int key = 0, sel = 0;
+
+	key = _getch();
+
+	if (key == 224)
+		key = _getch();
+
+	switch (key)	
+	{
+		case UP:
+			if (sel > 0)
+				sel--;
+			break;
+		case RIGHT:
+			sel = count;
+			break;
+		case DOWN:
+			if (sel < count)
+				sel++;
+			break;
+		case LEFT:
+			sel = 0;
+	}
+
+	return sel;
 }
 
 //--------------------------------------------------------------------------------------------------------
@@ -169,12 +190,6 @@ void BytesConv(float size)
 	float kb = 1024;
 
 	float ans = 0;
-	//sprintf("%.2f TB", size / tb);
-
-	//if (frac(ans))
-	//	cout << "~ " << int(ans) << " TB";
-	//else
-	//	cout << ans << " TB";
 
 	if (size >= tb)
 	{
@@ -198,7 +213,7 @@ void BytesConv(float size)
 	{
 		ans = size / kb;
 
-		frac(ans) ? (cout << "~ " << int(ans) << "TB") : (cout << " " << ans << "TB");
+		frac(ans) ? (cout << "~ " << int(ans) << "KB") : (cout << " " << ans << "KB");
 	}
 	else
 		frac(ans) ? (cout << "~ " << int(ans) << "B") : (cout << " " << ans << "B");

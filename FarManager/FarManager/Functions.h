@@ -3,7 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <math.h>
+#include <conio.h>
 
 #include "FileManager.h"
 
@@ -33,6 +33,14 @@ enum Colors
 	MAGENTA,
 	YELLOW,
 	WHITE
+};
+
+enum KEY
+{
+	UP = 72,
+	RIGHT = 77,
+	DOWN = 80,
+	LEFT = 75
 };
 
 enum StartCoord
@@ -71,16 +79,17 @@ enum Place
 
 class Functions
 {
+
 	void line(int x, int y, int length, Colors color, int direction);
 	void square();
 	void frame();
 	void background();
 	friend bool frac(float num);
-
+	
 public:
 	Functions();
 	~Functions();
 	void head();
 	friend void BytesConv(float size);
-	friend void move();
+	int move(int count);
 };
