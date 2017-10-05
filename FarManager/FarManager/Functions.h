@@ -89,6 +89,8 @@ class Functions
 	friend bool frac(float num);
 
 public:
+	bool enter = false;
+
 	Functions();
 	~Functions();
 	void head();

@@ -177,8 +177,7 @@ int Functions::move(int count)
 			sel = 0;
 			break;
 		case KEY::ENTER:
-			 
-			break;
+			this->enter = true;
 	}
 
 	return sel;

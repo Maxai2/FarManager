@@ -14,15 +14,20 @@ using namespace std;
 class FileManager
 {
 	string path;
-	
+	string oldPath;
+
 	vector<string> directory;
 	 
 	int count = 0;
+
 public:
 	FileManager(string path);
 
-	void showDirectory(int sel);
 	int getCount();
+	string getName(int sel);
+	friend void clear(string what);
+
+	void showDirectory(int sel, string mode);
 	void changeDirectory(string dir);
 	//void remove(string path);
 	//void rename(string path, string name);

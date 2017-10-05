@@ -15,31 +15,26 @@ using namespace std;
 
 void main() 
 {
-	vector<string> buffer;
+	Functions f;
+	f.head();
+	f.noCursor(true);
 
-	buffer.insert(buffer.end(), "agfwerge");
-	
-	//cout << buffer << endl;
-	//for (int i = 0; i < 2; i++)
-	//{
-	//	cout << buffer[i] << endl;
-	//}
+	FileManager fm("C://*");
 
+	int temp = 0;
 
-	//Functions f;
-	//f.head();
-	//f.noCursor(true);
+	while(1)
+	{
+		fm.showDirectory(temp, "show");
+		temp = f.move(fm.getCount());
 
-	//FileManager fm("C://*");
+		if (f.enter)
+		{
+			fm.changeDirectory(fm.getName(temp));
+			fm.showDirectory(temp, "clear");
+		}
+	}
 
-	//int temp = 0;
-
-	//while(1)
-	//{
-	//	fm.showDirectory(temp);
-	//	temp = f.move(fm.getCount());
-
-	//}
-
+//	system("pause");
 
 }
