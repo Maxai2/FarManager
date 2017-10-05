@@ -40,7 +40,8 @@ enum KEY
 	UP = 72,
 	RIGHT = 77,
 	DOWN = 80,
-	LEFT = 75
+	LEFT = 75,
+	ENTER = 13 
 };
 
 enum StartCoord
@@ -79,17 +80,19 @@ enum Place
 
 class Functions
 {
+	int sel = 0;
 
 	void line(int x, int y, int length, Colors color, int direction);
 	void square();
 	void frame();
 	void background();
 	friend bool frac(float num);
-	
+
 public:
 	Functions();
 	~Functions();
 	void head();
 	friend void BytesConv(float size);
 	int move(int count);
+	void noCursor(bool visible);
 };

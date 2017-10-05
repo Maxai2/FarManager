@@ -153,7 +153,7 @@ void Functions::head()
 
 int Functions::move(int count)
 {
-	int key = 0, sel = 0;
+	int key = 0;
 
 	key = _getch();
 
@@ -162,22 +162,35 @@ int Functions::move(int count)
 
 	switch (key)	
 	{
-		case UP:
+		case KEY::UP:
 			if (sel > 0)
 				sel--;
 			break;
-		case RIGHT:
-			sel = count;
+		case KEY::RIGHT:
+			sel = count - 1;
 			break;
-		case DOWN:
-			if (sel < count)
+		case KEY::DOWN:
+			if (sel < count - 1)
 				sel++;
 			break;
-		case LEFT:
+		case KEY::LEFT:
 			sel = 0;
+			break;
+		case KEY::ENTER:
+			 
+			break;
 	}
 
 	return sel;
+}
+
+//--------------------------------------------------------------------------------------------------------
+
+void Functions::noCursor(bool visible)
+{
+	CONSOLE_CURSOR_INFO lpCursor;
+	lpCursor.bVisible = visible;
+	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &lpCursor);
 }
 
 //--------------------------------------------------------------------------------------------------------

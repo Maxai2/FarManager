@@ -3,6 +3,7 @@
 #include <string>
 #include <direct.h>
 #include <io.h>
+#include <vector>
 
 #include "Functions.h"
 
@@ -14,18 +15,20 @@ class FileManager
 {
 	string path;
 	
+	vector<string> directory;
+	 
 	int count = 0;
 public:
 	FileManager(string path);
 
 	void showDirectory(int sel);
 	int getCount();
-	//void findFiles(string mask);
-	//void changeDirectory(string dir);
+	void changeDirectory(string dir);
 	//void remove(string path);
 	//void rename(string path, string name);
 	//void copy(string oldpath, string newpath);
 	//void move()
+	//void findFiles(string mask);
 };
 
 //--------------------------------------------------------------------------------------------------------

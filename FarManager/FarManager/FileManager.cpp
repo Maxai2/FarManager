@@ -8,17 +8,16 @@ FileManager::FileManager(string path) { this->path = path; }
 
 void FileManager::showDirectory(int sel)
 {
-	COORDS(StartCoord::startY + 2, StartCoord::startX + 1);
-
 	bool check = false;
 	_finddata_t fileinfo;
 	int handle = _findfirst(path.c_str(), &fileinfo);
 	int find = handle;
 	int folderCount = 0, fileCount = 0;
+	this->count = 0;
+
 	while (find != -1)
 	{
-		COORDS(StartCoord::startY + 2 + (short)this->count, StartCoord::startX + 1);
-		this->count++;
+		COORDS((short)this->count + 2, 1);
 
 		if (this->count == sel)
 			check = true;
@@ -32,29 +31,44 @@ void FileManager::showDirectory(int sel)
 			}
 		else
 		if (fileinfo.attrib & _A_SUBDIR)
-			COLOR(Colors::WHITE, defaultBackGround);
+		{
+			if (check)
+				COLOR(Colors::WHITE, Colors::CYAN);
+			else
+				COLOR(Colors::WHITE, defaultBackGround);
+		}
 		else
 		if (fileinfo.attrib & _A_NORMAL)
-			COLOR(Colors::BLUE, defaultBackGround);
+		{
+			if (check)
+				COLOR(Colors::BLUE, Colors::CYAN);
+			else
+				COLOR(Colors::BLUE, defaultBackGround);
+		}
 		else
-			COLOR(Colors::GREY, defaultBackGround);
+		{
+			if (check)
+				COLOR(Colors::GREY, Colors::CYAN);
+			else
+				COLOR(Colors::GREY, defaultBackGround);
+		}
 
 		cout << fileinfo.name << '\n';
 
 		int size = fileinfo.size;
-		COORDS(StartCoord::startY + 1 + (short)this->count, Place::Size + 2);
+		COORDS((short)this->count + 2, Place::Size + 2);
 		if (size == 0)
 			cout << "Folder";
 		else
 			BytesConv(fileinfo.size);
 		
 
-		COORDS(StartCoord::startY + 1 + (short)this->count, Place::Type + 2);
+		COORDS((short)this->count + 2, Place::Type + 2);
 
 		if (fileinfo.attrib & _A_SUBDIR){ cout << "Direct"; folderCount++; }
 		else { cout << " File"; fileCount++; }
 
-		COORDS(StartCoord::startY + 1 + (short)this->count, Place::Attr + 2);
+		COORDS((short)this->count + 2, Place::Attr + 2);
 		string attr;
 		if (fileinfo.attrib & _A_SYSTEM) attr += "S";
 		if (fileinfo.attrib & _A_NORMAL) attr += "N";
@@ -63,6 +77,10 @@ void FileManager::showDirectory(int sel)
 
 		cout << attr;
 
+ 		this->directory[count] = fileinfo.name;
+
+		this->count++;
+		check = false;
 		find = _findnext(handle, &fileinfo);
 	}
 	
@@ -73,7 +91,6 @@ void FileManager::showDirectory(int sel)
 	//COORDS(Console::consoleHeight + 100, StartCoord::headX);
 	//cout << " file(s) in folder..." << this->path << "\n\n";
 	
-	check = false;
 	_findclose(handle);
 }
 //--------------------------------------------------------------------------------------------------------
@@ -81,4 +98,13 @@ void FileManager::showDirectory(int sel)
 int FileManager::getCount()
 {
 	return this->count;
+}
+
+//--------------------------------------------------------------------------------------------------------
+
+void FileManager::changeDirectory(string dir)
+{
+	this->path.erase(this->path.end() - 1);
+
+	this->path += dir + "//*";
 }

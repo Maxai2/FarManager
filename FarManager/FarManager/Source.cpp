@@ -13,23 +13,33 @@ using namespace std;
 
 //--------------------------------------------------------------------------------------------------------
 
-void main()
+void main() 
 {
-	Functions f;
-	f.head();
+	vector<string> buffer;
 
-	FileManager fm("C://*");
+	buffer.insert(buffer.end(), "agfwerge");
+	
+	//cout << buffer << endl;
+	//for (int i = 0; i < 2; i++)
+	//{
+	//	cout << buffer[i] << endl;
+	//}
 
-	fm.showDirectory(0);
 
-	int temp = 0;
-	while(1)
-	{
-		temp = f.move(fm.getCount());
-		system("cls");
-		fm.showDirectory(0);
-		_getch();	
-	}
+	//Functions f;
+	//f.head();
+	//f.noCursor(true);
+
+	//FileManager fm("C://*");
+
+	//int temp = 0;
+
+	//while(1)
+	//{
+	//	fm.showDirectory(temp);
+	//	temp = f.move(fm.getCount());
+
+	//}
 
 
 }
