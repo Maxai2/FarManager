@@ -121,7 +121,7 @@ void FileManager::showDirectory(int sel, string mode)
 			find = _findnext(handle, &fileinfo);
 		}
 
-		_findclose(handle);
+		_findclose(handle); 
 	}
 }
 //--------------------------------------------------------------------------------------------------------

@@ -21,7 +21,7 @@ class FileManager
 	int count = 0;
 
 public:
-	FileManager(string path);
+	FileManager(string path); 
 
 	int getCount();
 	string getName(int sel);

@@ -158,7 +158,7 @@ int Functions::move(int count)
 	key = _getch();
 
 	if (key == 224)
-		key = _getch();
+		key = _getch(); 
 
 	switch (key)	
 	{

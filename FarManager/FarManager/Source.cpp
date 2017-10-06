@@ -21,11 +21,11 @@ void main()
 
 	FileManager fm("C://*");
 
-	int temp = 0;
+	int temp = 0; 
 
 	while(1)
 	{
-		fm.showDirectory(temp, "show");
+		fm.showDirectory(temp, "show"); 
 		temp = f.move(fm.getCount());
 
 		if (f.enter)

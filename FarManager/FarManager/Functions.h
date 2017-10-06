@@ -82,7 +82,7 @@ class Functions
 {
 	int sel = 0;
 
-	void line(int x, int y, int length, Colors color, int direction);
+	void line(int x, int y, int length, Colors color, int direction); 
 	void square();
 	void frame();
 	void background();
