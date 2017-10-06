@@ -19,7 +19,8 @@ void main()
 	f.head();
 	f.noCursor(true);
 
-	FileManager fm("C://*");
+//	FileManager fm("C://*");
+	FileManager fm("C://Users//Ali//*");
 
 	int temp = 0; 
 
@@ -32,6 +33,7 @@ void main()
 		{
 			fm.changeDirectory(fm.getName(temp));
 			fm.showDirectory(temp, "clear");
+			temp = 0; f.sel = 0; f.enter = false;
 		}
 	}
 

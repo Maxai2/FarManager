@@ -61,9 +61,9 @@ enum Console
 
 enum Place
 {
-	Size = 50,
-	Type = 58,
-	Attr = 66
+	Size = 54,
+	Type = 61,
+	Attr = 68
 };
 
 //--------------------------------------------------------------------------------------------------------
@@ -80,7 +80,6 @@ enum Place
 
 class Functions
 {
-	int sel = 0;
 
 	void line(int x, int y, int length, Colors color, int direction); 
 	void square();
@@ -89,6 +88,7 @@ class Functions
 	friend bool frac(float num);
 
 public:
+	int sel = 0;
 	bool enter = false;
 
 	Functions();

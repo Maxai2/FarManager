@@ -12,6 +12,7 @@ void FileManager::showDirectory(int sel, string mode)
 	if (mode == "show")
 	{
 		bool check = false;
+		string buffer;
 		_finddata_t fileinfo;
 		int handle = _findfirst(path.c_str(), &fileinfo);
 		this->oldPath = this->path;
@@ -57,7 +58,12 @@ void FileManager::showDirectory(int sel, string mode)
 					COLOR(Colors::GREY, defaultBackGround);
 			}
 
-			cout << fileinfo.name << '\n';
+			buffer = fileinfo.name;
+
+			if (buffer.size() >= 40)
+				cout << setw(40) << left << fileinfo.name << "..." << '\n';
+			else
+				cout << fileinfo.name << '\n';
 
 			int size = fileinfo.size;
 			COORDS((short)this->count + 2, Place::Size + 2);
@@ -80,7 +86,8 @@ void FileManager::showDirectory(int sel, string mode)
 
 			cout << attr;
 		
-			directory.push_back(fileinfo.name);
+			if (this->willbe)
+				directory.push_back(fileinfo.name);
 
 			this->count++;
 			check = false;
@@ -88,6 +95,7 @@ void FileManager::showDirectory(int sel, string mode)
 		}
 	
 		COLOR(defaultForeGround, defaultBackGround);
+		this->willbe = false;
 
 		//COORDS(Console::consoleHeight + 100, StartCoord::headX);
 		//cout << "Folders count: " << folderCount << ", files count: " << fileCount;
@@ -117,10 +125,13 @@ void FileManager::showDirectory(int sel, string mode)
 			COORDS((short)this->count + 2, Place::Attr + 2);
 			clear("attr");
 
+			directory.pop_back();
+
 			this->count++;
 			find = _findnext(handle, &fileinfo);
 		}
 
+		this->willbe = true;
 		_findclose(handle); 
 	}
 }
@@ -157,8 +168,15 @@ void clear(string what)
 			cout << " ";
 	}
 	else
-		for (int i = 0; i < 7; i++)
+	if (what == "attr")
+	{
+		for (int i = 0; i < 4; i++)
 			cout << " ";
+	}
+	else
+		for (int i = 0; i < 6; i++)
+			cout << " ";
+
 
 //	COORDS(row, col);
 }

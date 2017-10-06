@@ -4,6 +4,7 @@
 #include <direct.h>
 #include <io.h>
 #include <vector>
+#include <iomanip>
 
 #include "Functions.h"
 
@@ -15,6 +16,7 @@ class FileManager
 {
 	string path;
 	string oldPath;
+	bool willbe = true;
 
 	vector<string> directory;
 	 

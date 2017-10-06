@@ -142,7 +142,7 @@ void Functions::head()
 		COORDS(StartCoord::headY, StartCoord::headX + Place::Type + 2 + i);
 		cout << "Type";
 		line(StartCoord::headX + Place::Attr + i, StartCoord::headY, Console::consoleHeight / 2 - 3, Colors::YELLOW, 2);
-		COORDS(StartCoord::headY, StartCoord::headX + Place::Attr + 2 + i);
+		COORDS(StartCoord::headY, StartCoord::headX + Place::Attr + 1 + i);
 		cout << "Attr";
 
 //		line(StartCoord::headX + i, Console::consoleHeight / 2 - 2, Console::consoleHeight / 2, defaultForeGround, 6);
@@ -207,25 +207,25 @@ void BytesConv(float size)
 	{
 		ans = size / tb;
 
-		frac(ans) ? (cout << "~ " << int(ans) << "TB") : (cout << " " << ans << "TB");
+		frac(ans) ? (cout << "~ " << int(ans) << "T") : (cout << " " << ans << "T");
 	}
 	else if (size >= gb && size < tb)
 	{
 		ans = size / gb;
 
-		frac(ans) ? (cout << "~ " << int(ans) << "GB") : (cout << " " << ans << "GB");
+		frac(ans) ? (cout << "~ " << int(ans) << "G") : (cout << " " << ans << "G");
 	}
 	else if (size >= mb && size < gb)
 	{
 		ans = size / mb;
 
-		frac(ans) ? (cout << "~ " << int(ans) << "MB") : (cout << " " << ans << "MB");
+		frac(ans) ? (cout << "~ " << int(ans) << "M") : (cout << " " << ans << "M");
 	}
 	else if (size >= kb && size < mb)
 	{
 		ans = size / kb;
 
-		frac(ans) ? (cout << "~ " << int(ans) << "KB") : (cout << " " << ans << "KB");
+		frac(ans) ? (cout << "~ " << int(ans) << "K") : (cout << " " << ans << "K");
 	}
 	else
 		frac(ans) ? (cout << "~ " << int(ans) << "B") : (cout << " " << ans << "B");
