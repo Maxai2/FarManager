@@ -12,16 +12,24 @@ void FileManager::showDirectory(int sel, string mode)
 	if (mode == "show")
 	{
 		bool check = false;
-		string buffer;
+		string buffer, temppath;
 		_finddata_t fileinfo;
 		int handle = _findfirst(path.c_str(), &fileinfo);
 		this->oldPath = this->path;
 		int find = handle;
 		int folderCount = 0, fileCount = 0;
 		this->count = 0;
+		temppath = fileinfo.name;
 
 		while (find != -1)
 		{
+			if (temppath == ".")
+			{
+				temppath = "";
+				find = _findnext(handle, &fileinfo);
+				continue;
+			}
+			
 			COORDS((short)this->count + 2, 1);
 
 			if (this->count == sel)
@@ -59,9 +67,11 @@ void FileManager::showDirectory(int sel, string mode)
 			}
 
 			buffer = fileinfo.name;
-
-			if (buffer.size() >= 40)
-				cout << setw(40) << left << fileinfo.name << "..." << '\n';
+			if (buffer.size() >= 50)
+			{
+				buffer.erase(buffer.begin() + 50, buffer.end());
+				cout << buffer << "..." << '\n';
+			}
 			else
 				cout << fileinfo.name << '\n';
 
@@ -91,6 +101,7 @@ void FileManager::showDirectory(int sel, string mode)
 
 			this->count++;
 			check = false;
+
 			find = _findnext(handle, &fileinfo);
 		}
 	
@@ -110,9 +121,17 @@ void FileManager::showDirectory(int sel, string mode)
 		int handle = _findfirst(oldPath.c_str(), &fileinfo);
 		int find = handle;
 		this->count = 0;
+		string tempoldPath = fileinfo.name;
 
 		while (find != -1)
 		{
+			if (tempoldPath == ".")
+			{
+				tempoldPath = "";
+				find = _findnext(handle, &fileinfo);
+				continue;
+			}
+
 			COORDS((short)this->count + 2, 1);
 			clear("name");
 
@@ -155,7 +174,17 @@ void FileManager::changeDirectory(string dir)
 {
 	this->path.erase(this->path.end() - 1);
 
-	this->path += dir + "//*";
+	if (dir == "..")
+	{
+		this->path.erase(this->path.end() - 2, this->path.end());
+
+		for (int i = this->path.size() - 1; this->path[i] != '/' ; i--)
+			this->path.erase(this->path.end() - 1);
+
+		this->path += '*';
+	}
+	else
+		this->path += dir + "//*";
 }
 
 //--------------------------------------------------------------------------------------------------------
@@ -164,7 +193,7 @@ void clear(string what)
 {
 	if (what == "name")
 	{
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < 54; i++)
 			cout << " ";
 	}
 	else
