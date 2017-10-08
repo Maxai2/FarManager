@@ -147,6 +147,11 @@ void Functions::head()
 
 //		line(StartCoord::headX + i, Console::consoleHeight / 2 - 2, Console::consoleHeight / 2, defaultForeGround, 6);
 	}
+
+	char fKey[][10] = {"F2 Rename", "F3 View", "F5 Copy", "F6 Move", "F7 Mkdir", "F8 Delete", "F10 Exit"};
+
+	COORDS(35, 2);
+	cout << "t";
 }
 
 //--------------------------------------------------------------------------------------------------------

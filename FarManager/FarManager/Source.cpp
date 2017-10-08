@@ -20,7 +20,8 @@ void main()
 	f.noCursor(true);
 
 //	FileManager fm("C://*");
-	FileManager fm("C://Users//Joker//*");
+//	FileManager fm("C://Users//Joker//*");
+	FileManager fm("D://Joker//Desktop//New folder//*");
 
 	int temp = 0; 
 

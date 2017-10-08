@@ -84,7 +84,13 @@ void FileManager::showDirectory(int sel, string mode)
 		
 
 			COORDS((short)this->count + 2, Place::Type + 2);
-			if (fileinfo.attrib & _A_SUBDIR){ cout << "Direct"; folderCount++; }
+			if (fileinfo.attrib & _A_SUBDIR)
+			{
+				if (fileinfo.name == "..")
+					folderCount++;
+
+				cout << "Direct"; 
+			}
 			else { cout << " File"; fileCount++; }
 
 			COORDS((short)this->count + 2, Place::Attr + 2);
@@ -105,14 +111,15 @@ void FileManager::showDirectory(int sel, string mode)
 			find = _findnext(handle, &fileinfo);
 		}
 	
-		COLOR(defaultForeGround, defaultBackGround);
 		this->willbe = false;
 
-		//COORDS(Console::consoleHeight + 100, StartCoord::headX);
-		//cout << "Folders count: " << folderCount << ", files count: " << fileCount;
-		//COORDS(Console::consoleHeight + 100, StartCoord::headX);
-		//cout << " file(s) in folder..." << this->path << "\n\n";
+		COLOR(Colors::CYAN, defaultBackGround);
+		COORDS(32, StartCoord::headX);
+		cout << "Folders count: " << folderCount << ", files count: " << fileCount << endl;
+		COORDS(33, StartCoord::headX);
+		cout << "File(s) in folder..." << this->path << "\n\n";
 	
+		COLOR(defaultForeGround, defaultBackGround);
 		_findclose(handle);
 	}
 	else
