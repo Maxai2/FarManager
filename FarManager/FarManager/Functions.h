@@ -37,11 +37,19 @@ enum Colors
 
 enum KEY
 {
+	F2 = 60,
+	F3 = 61,
+	F4 = 62,
+	F5 = 63,
+	F6 = 64,
+	F7 = 65,
+	F8 = 66,
+	F10 = 68,
 	UP = 72,
 	RIGHT = 77,
 	DOWN = 80,
 	LEFT = 75,
-	ENTER = 13 
+	ENTER = 13
 };
 
 enum StartCoord
@@ -90,11 +98,12 @@ class Functions
 public:
 	int sel = 0;
 	bool enter = false;
+	bool F7 = false;
 
 	Functions();
 	~Functions();
 	void head();
 	friend void BytesConv(float size);
-	int move(int count);
+	int keyWork(int count);
 	void noCursor(bool visible);
 };

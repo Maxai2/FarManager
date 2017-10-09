@@ -148,15 +148,28 @@ void Functions::head()
 //		line(StartCoord::headX + i, Console::consoleHeight / 2 - 2, Console::consoleHeight / 2, defaultForeGround, 6);
 	}
 
-	char fKey[][10] = {"F2 Rename", "F3 View", "F5 Copy", "F6 Move", "F7 Mkdir", "F8 Delete", "F10 Exit"};
+	string fKey[] = {"F2 Rename", "F3 View", "F4 Find", "F5 Copy", "F6 Move", "F7 Mkdir", "F8 Delete", "F10 Exit"};
 
-	COORDS(35, 2);
-	cout << "t";
+	COORDS(36, 1);
+	int go = 7, arrCount  = 0;
+	for (int i = 0; i < 85; i++)
+	{
+		if (i == go)
+		{
+			COLOR(Colors::BLACK, Colors::DARKCYAN);
+			cout << fKey[arrCount];
+			COLOR(defaultForeGround, defaultBackGround);
+			go += 10; arrCount++;
+		}
+		else
+			cout << " ";
+	}
+
 }
 
 //--------------------------------------------------------------------------------------------------------
 
-int Functions::move(int count)
+int Functions::keyWork(int count)
 {
 	int key = 0;
 
@@ -167,22 +180,25 @@ int Functions::move(int count)
 
 	switch (key)	
 	{
-		case KEY::UP:
-			if (sel > 0)
-				sel--;
-			break;
-		case KEY::RIGHT:
-			sel = count - 1;
-			break;
-		case KEY::DOWN:
-			if (sel < count - 1)
-				sel++;
-			break;
-		case KEY::LEFT:
-			sel = 0;
-			break;
-		case KEY::ENTER:
-			this->enter = true;
+	case KEY::F2:
+		this->enter = true;
+		break;
+	case KEY::UP:
+		if (sel > 0)
+			sel--;
+		break;
+	case KEY::RIGHT:
+		sel = count - 1;
+		break;
+	case KEY::DOWN:
+		if (sel < count - 1)
+			sel++;
+		break;
+	case KEY::LEFT:
+		sel = 0;
+		break;
+	case KEY::ENTER:
+		this->enter = true;
 	}
 
 	return sel;
@@ -192,9 +208,13 @@ int Functions::move(int count)
 
 void Functions::noCursor(bool visible)
 {
-	CONSOLE_CURSOR_INFO lpCursor;
-	lpCursor.bVisible = visible;
-	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &lpCursor);
+	HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	CONSOLE_CURSOR_INFO     cursorInfo;
+
+	GetConsoleCursorInfo(out, &cursorInfo);
+	cursorInfo.bVisible = visible; // set the cursor visibility
+	SetConsoleCursorInfo(out, &cursorInfo);
 }
 
 //--------------------------------------------------------------------------------------------------------

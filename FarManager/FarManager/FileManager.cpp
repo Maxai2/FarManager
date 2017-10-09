@@ -2,12 +2,47 @@
 
 //--------------------------------------------------------------------------------------------------------
 
-
 FileManager::FileManager(string path) { this->path = path; }
 
 //--------------------------------------------------------------------------------------------------------
 
-void FileManager::showDirectory(int sel, string mode)
+void FileManager::pathModif(string path)
+{
+	for (int i = 0; i < path.size(); i++)
+	{
+
+		if (path[i] == '/')
+		{
+			cout << '\\';
+			i++;
+		}
+		else
+		if (path[i] != '*')
+			cout << path[i];
+	}
+	cout << '>';
+}
+
+//--------------------------------------------------------------------------------------------------------
+
+int FileManager::dirCount(string path)
+{
+	_finddata_t fileinfo;
+	int handle = _findfirst(path.c_str(), &fileinfo);
+	int find = handle, count = 0;
+
+	while (find != -1)
+	{
+		count++;
+		find = _findnext(handle, &fileinfo);
+	}
+
+	return count;
+}
+
+//--------------------------------------------------------------------------------------------------------
+
+void FileManager::showDirectory(int sel, string mode, string exception)
 {
 	if (mode == "show")
 	{
@@ -23,14 +58,17 @@ void FileManager::showDirectory(int sel, string mode)
 
 		while (find != -1)
 		{
-			if (temppath == ".")
+			if (temppath == exception)
 			{
 				temppath = "";
 				find = _findnext(handle, &fileinfo);
 				continue;
 			}
 			
-			COORDS((short)this->count + 2, 1);
+			if (this->count > 29)
+				break;
+			else
+				COORDS((short)this->count + 2, 1);
 
 			if (this->count == sel)
 				check = true;
@@ -86,7 +124,7 @@ void FileManager::showDirectory(int sel, string mode)
 			COORDS((short)this->count + 2, Place::Type + 2);
 			if (fileinfo.attrib & _A_SUBDIR)
 			{
-				if (fileinfo.name == "..")
+				if (fileinfo.name != "..")
 					folderCount++;
 
 				cout << "Direct"; 
@@ -114,10 +152,10 @@ void FileManager::showDirectory(int sel, string mode)
 		this->willbe = false;
 
 		COLOR(Colors::CYAN, defaultBackGround);
-		COORDS(32, StartCoord::headX);
-		cout << "Folders count: " << folderCount << ", files count: " << fileCount << endl;
 		COORDS(33, StartCoord::headX);
-		cout << "File(s) in folder..." << this->path << "\n\n";
+		cout << "\t\tFolders count: " << folderCount << ", files count: " << fileCount;
+		COORDS(35, StartCoord::headX);
+		pathModif(this->path);
 	
 		COLOR(defaultForeGround, defaultBackGround);
 		_findclose(handle);
@@ -163,17 +201,15 @@ void FileManager::showDirectory(int sel, string mode)
 }
 //--------------------------------------------------------------------------------------------------------
 
-int FileManager::getCount()
-{
-	return this->count;
-}
+int FileManager::getCount() { return this->count; }
 
 //--------------------------------------------------------------------------------------------------------
 
-string FileManager::getName(int sel)
-{
-	return this->directory[sel];
-}
+string FileManager::getName(int sel) { return this->directory[sel]; }
+
+//--------------------------------------------------------------------------------------------------------
+
+string FileManager::getPath() { return this->path; }
 
 //--------------------------------------------------------------------------------------------------------
 
@@ -192,6 +228,14 @@ void FileManager::changeDirectory(string dir)
 	}
 	else
 		this->path += dir + "//*";
+}
+
+//--------------------------------------------------------------------------------------------------------
+
+void FileManager::mkdir(string dirName)
+{
+
+	mkdir(dirName);
 }
 
 //--------------------------------------------------------------------------------------------------------

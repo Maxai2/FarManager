@@ -22,15 +22,19 @@ class FileManager
 	 
 	int count = 0;
 
+	void pathModif(string path);
 public:
 	FileManager(string path); 
 
 	int getCount();
 	string getName(int sel);
+	string getPath();
 	friend void clear(string what);
+	int dirCount(string path);
 
-	void showDirectory(int sel, string mode);
+	void showDirectory(int sel, string mode, string exception = ".");
 	void changeDirectory(string dir);
+	void mkdir(string dirName);
 	//void remove(string path);
 	//void rename(string path, string name);
 	//void copy(string oldpath, string newpath);

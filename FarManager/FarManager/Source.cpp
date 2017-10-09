@@ -17,18 +17,25 @@ void main()
 {
 	Functions f;
 	f.head();
-	f.noCursor(true);
+	f.noCursor(false);
 
-//	FileManager fm("C://*");
-//	FileManager fm("C://Users//Joker//*");
-	FileManager fm("D://Joker//Desktop//New folder//*");
+
+	FileManager fm("C://*");
+	//FileManager fm("C://Users//Joker//*");
+	//FileManager fm("C://Users//Ali//Desktop//New folder//*");
 
 	int temp = 0; 
 
 	while(1)
 	{
-		fm.showDirectory(temp, "show"); 
-		temp = f.move(fm.getCount());
+		if (temp > fm.dirCount(fm.getPath()))
+		{
+			fm.showDirectory(temp, "show", fm.getName(temp - 1));
+		}
+		else
+			fm.showDirectory(temp, "show"); 
+
+		temp = f.keyWork(fm.getCount());
 
 		if (f.enter)
 		{
@@ -36,8 +43,13 @@ void main()
 			fm.showDirectory(temp, "clear");
 			temp = 0; f.sel = 0; f.enter = false;
 		}
+		else
+		if (f.F7)
+		{
+			fm.mkdir("asd");
+		}
 	}
 
-//	system("pause");
+	system("pause");
 
 }
