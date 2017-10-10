@@ -23,6 +23,7 @@ class FileManager
 	int count = 0;
 
 	void pathModif(string path);
+	void clearPathPlace();
 public:
 	FileManager(string path); 
 

@@ -24,13 +24,14 @@ void main()
 	//FileManager fm("C://Users//Joker//*");
 	//FileManager fm("C://Users//Ali//Desktop//New folder//*");
 
-	int temp = 0; 
+	int temp = 0, realCount = 0; 
 
 	while(1)
 	{
-		if (temp > fm.dirCount(fm.getPath()))
+		if (temp > 29)
 		{
 			fm.showDirectory(temp, "show", fm.getName(temp - 1));
+			
 		}
 		else
 			fm.showDirectory(temp, "show"); 

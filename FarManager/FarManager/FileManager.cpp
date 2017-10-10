@@ -25,6 +25,14 @@ void FileManager::pathModif(string path)
 
 //--------------------------------------------------------------------------------------------------------
 
+void FileManager::clearPathPlace()
+{
+	for (int i = 0; i < Console::consoleWidth; i++)
+		cout << " ";
+}
+
+//--------------------------------------------------------------------------------------------------------
+
 int FileManager::dirCount(string path)
 {
 	_finddata_t fileinfo;
@@ -78,7 +86,7 @@ void FileManager::showDirectory(int sel, string mode, string exception)
 				if (check)
 					COLOR(Colors::LIGHTGREY, Colors::DARKCYAN);
 				else
-					COLOR(Colors::LIGHTGREY, defaultBackGround);
+					COLOR(Colors::CYAN, defaultBackGround);
 			}
 			else
 			if (fileinfo.attrib & _A_SUBDIR)
@@ -155,6 +163,8 @@ void FileManager::showDirectory(int sel, string mode, string exception)
 		COORDS(33, StartCoord::headX);
 		cout << "\t\tFolders count: " << folderCount << ", files count: " << fileCount;
 		COORDS(35, StartCoord::headX);
+		clearPathPlace();
+		COORDS(35, StartCoord::headX);
 		pathModif(this->path);
 	
 		COLOR(defaultForeGround, defaultBackGround);
@@ -165,10 +175,10 @@ void FileManager::showDirectory(int sel, string mode, string exception)
 		_finddata_t fileinfo;
 		int handle = _findfirst(oldPath.c_str(), &fileinfo);
 		int find = handle;
-		this->count = 0;
+		this->count;
 		string tempoldPath = fileinfo.name;
 
-		while (find != -1)
+		while (this->count != 0)
 		{
 			if (tempoldPath == ".")
 			{
@@ -191,7 +201,7 @@ void FileManager::showDirectory(int sel, string mode, string exception)
 
 			directory.pop_back();
 
-			this->count++;
+			this->count--;
 			find = _findnext(handle, &fileinfo);
 		}
 
