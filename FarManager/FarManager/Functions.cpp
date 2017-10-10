@@ -148,7 +148,7 @@ void Functions::head()
 //		line(StartCoord::headX + i, Console::consoleHeight / 2 - 2, Console::consoleHeight / 2, defaultForeGround, 6);
 	}
 
-	string fKey[] = {"F2 Rename", "F3 View", "F4 Find", "F5 Copy", "F6 Move", "F7 Mkdir", "F8 Delete", "F10 Exit"};
+	string fKey[] = {"2 Rename", "3 View", "4 Find", "5 Copy", "6 Move", "7 Mkdir", "8 Delete", "0 Exit"};
 
 	COORDS(36, 1);
 	int go = 7, arrCount  = 0;
@@ -181,7 +181,13 @@ int Functions::keyWork(int count)
 	switch (key)	
 	{
 	case KEY::F2:
-		this->enter = true;
+		this->F2 = true;
+		break;
+	case KEY::F5:
+		this->F5 = true;
+		break;
+	case KEY::F7:
+		this->F7 = true;
 		break;
 	case KEY::UP:
 		if (sel > 0)

@@ -17,13 +17,14 @@ class FileManager
 	string path;
 	string oldPath;
 	bool willbe = true;
-
+	bool newFolder;
 	vector<string> directory;
 	 
 	int count = 0;
 
 	void pathModif(string path);
 	void clearPathPlace();
+	int lengthPath(string path);
 public:
 	FileManager(string path); 
 
@@ -33,13 +34,13 @@ public:
 	friend void clear(string what);
 	int dirCount(string path);
 
-	void showDirectory(int sel, string mode, string exception = ".");
+	void showDirectory(int sel, string mode, char rightLeft, string exception = ".");
 	void changeDirectory(string dir);
-	void mkdir(string dirName);
+	void makedir();
+	void changeName(int num);
+	void copyName(int sel);
 	//void remove(string path);
-	//void rename(string path, string name);
-	//void copy(string oldpath, string newpath);
-	//void move()
+	//void move();
 	//void findFiles(string mask);
 };
 

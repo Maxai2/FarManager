@@ -37,14 +37,14 @@ enum Colors
 
 enum KEY
 {
-	F2 = 60,
-	F3 = 61,
-	F4 = 62,
-	F5 = 63,
-	F6 = 64,
-	F7 = 65,
-	F8 = 66,
-	F10 = 68,
+	F2 = 50,
+	F3 = 51,
+	F4 = 52,
+	F5 = 53,
+	F6 = 54,
+	F7 = 55,
+	F8 = 56,
+	F0 = 48,
 	UP = 72,
 	RIGHT = 77,
 	DOWN = 80,
@@ -98,6 +98,8 @@ class Functions
 public:
 	int sel = 0;
 	bool enter = false;
+	bool F2 = false;
+	bool F5 = false;
 	bool F7 = false;
 
 	Functions();

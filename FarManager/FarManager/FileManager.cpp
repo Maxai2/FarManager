@@ -33,6 +33,10 @@ void FileManager::clearPathPlace()
 
 //--------------------------------------------------------------------------------------------------------
 
+int FileManager::lengthPath(string path) { return path.size(); }
+
+//--------------------------------------------------------------------------------------------------------
+
 int FileManager::dirCount(string path)
 {
 	_finddata_t fileinfo;
@@ -50,7 +54,7 @@ int FileManager::dirCount(string path)
 
 //--------------------------------------------------------------------------------------------------------
 
-void FileManager::showDirectory(int sel, string mode, string exception)
+void FileManager::showDirectory(int sel, string mode, char rightLeft, string exception)
 {
 	if (mode == "show")
 	{
@@ -76,7 +80,10 @@ void FileManager::showDirectory(int sel, string mode, string exception)
 			if (this->count > 29)
 				break;
 			else
-				COORDS((short)this->count + 2, 1);
+				rightLeft == 'l' ? COORDS((short)this->count + 2, 76) : COORDS((short)this->count + 2, 1);
+
+			if (this->newFolder) clear("name");
+			rightLeft == 'l' ? COORDS((short)this->count + 2, 76) : COORDS((short)this->count + 2, 1);
 
 			if (this->count == sel)
 				check = true;
@@ -122,14 +129,13 @@ void FileManager::showDirectory(int sel, string mode, string exception)
 				cout << fileinfo.name << '\n';
 
 			int size = fileinfo.size;
-			COORDS((short)this->count + 2, Place::Size + 2);
+			rightLeft == 'l' ? COORDS((short)this->count + 2, 76 + Place::Size + 1) : COORDS((short)this->count + 2, Place::Size + 2);
 			if (size == 0)
 				cout << "Folder";
 			else
 				BytesConv(fileinfo.size);
-		
 
-			COORDS((short)this->count + 2, Place::Type + 2);
+			rightLeft == 'l' ? COORDS((short)this->count + 2, 76 + Place::Type + 1) : COORDS((short)this->count + 2, Place::Type + 2);
 			if (fileinfo.attrib & _A_SUBDIR)
 			{
 				if (fileinfo.name != "..")
@@ -139,7 +145,7 @@ void FileManager::showDirectory(int sel, string mode, string exception)
 			}
 			else { cout << " File"; fileCount++; }
 
-			COORDS((short)this->count + 2, Place::Attr + 2);
+			rightLeft == 'l' ? COORDS((short)this->count + 2, 76 + Place::Attr + 1) : COORDS((short)this->count + 2, Place::Attr + 2);
 			string attr;
 			if (fileinfo.attrib & _A_SYSTEM) attr += "S";
 			if (fileinfo.attrib & _A_NORMAL) attr += "N";
@@ -157,11 +163,11 @@ void FileManager::showDirectory(int sel, string mode, string exception)
 			find = _findnext(handle, &fileinfo);
 		}
 	
-		this->willbe = false;
+		this->willbe = false; this->newFolder = false;
 
-		COLOR(Colors::CYAN, defaultBackGround);
+		COLOR(Colors::GREEN, defaultBackGround);
 		COORDS(33, StartCoord::headX);
-		cout << "\t\tFolders count: " << folderCount << ", files count: " << fileCount;
+		cout << "\t\tFolders count: " << folderCount - 1 << ", files count: " << fileCount;
 		COORDS(35, StartCoord::headX);
 		clearPathPlace();
 		COORDS(35, StartCoord::headX);
@@ -242,16 +248,52 @@ void FileManager::changeDirectory(string dir)
 
 //--------------------------------------------------------------------------------------------------------
 
-void FileManager::mkdir(string dirName)
+void FileManager::makedir()
 {
+	COORDS(35, lengthPath(this->path));
+	string newFolder, newPath;
+	getline(cin, newFolder);
+	newPath = this->path;
+	newPath.erase(newPath.end() - 1);
+	newPath += newFolder;
+	_mkdir(newPath.c_str());
+	this->count++;
+	this->newFolder = true;
+	this->directory.push_back(newFolder);
+}
 
-	mkdir(dirName);
+//--------------------------------------------------------------------------------------------------------
+
+void FileManager::changeName(int num)
+{
+	COORDS(35, lengthPath(this->path));
+	string newPath, oldFolder = this->path, str;
+	getline(cin, str);
+	oldFolder.erase(oldFolder.end() - 1);
+	newPath = oldFolder;
+	oldFolder += this->getName(num);
+	newPath += str;
+	rename(oldFolder.c_str(), newPath.c_str());
+	this->newFolder = true;
+}
+
+//--------------------------------------------------------------------------------------------------------
+
+void FileManager::copyName(int sel)
+{
+	while (true)
+	{
+		showDirectory(sel, "show", 'l');
+		
+	}
+	
 }
 
 //--------------------------------------------------------------------------------------------------------
 
 void clear(string what)
 {
+	COLOR(defaultForeGround, defaultBackGround);
 	if (what == "name")
 	{
 		for (int i = 0; i < 54; i++)
@@ -266,7 +308,6 @@ void clear(string what)
 	else
 		for (int i = 0; i < 6; i++)
 			cout << " ";
-
 
 //	COORDS(row, col);
 }
