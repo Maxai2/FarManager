@@ -45,6 +45,7 @@ enum KEY
 	F7 = 55,
 	F8 = 56,
 	F0 = 48,
+	TAB = 9,
 	UP = 72,
 	RIGHT = 77,
 	DOWN = 80,
@@ -56,8 +57,9 @@ enum StartCoord
 {
 	startX = 0,
 	startY = 0,
-	headX = 1,
-	headY = 1
+	headXl = 1,
+	headY = 1,
+	headXr = 76
 };
 
 enum Console
@@ -98,6 +100,8 @@ class Functions
 public:
 	int sel = 0;
 	bool enter = false;
+	bool tab = false;
+	bool F0 = false;
 	bool F2 = false;
 	bool F5 = false;
 	bool F7 = false;

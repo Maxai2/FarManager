@@ -133,16 +133,16 @@ void Functions::head()
 	for (short i = 0; i < Console::consoleWidth; i += Console::consoleWidth / 2)
 	{
 		COLOR(Colors::YELLOW, defaultBackGround);
-		COORDS(StartCoord::headY, StartCoord::headX + 20 + i);
+		COORDS(StartCoord::headY, StartCoord::headXl + 20 + i);
 		cout << "Name";
-		line(StartCoord::headX + Place::Size + i, StartCoord::headY, Console::consoleHeight / 2 - 3, Colors::YELLOW, 2);
-		COORDS(StartCoord::headY, StartCoord::headX + Place::Size + 2 + i);
+		line(StartCoord::headXl + Place::Size + i, StartCoord::headY, Console::consoleHeight / 2 - 3, Colors::YELLOW, 2);
+		COORDS(StartCoord::headY, StartCoord::headXl + Place::Size + 2 + i);
 		cout << "Size";
-		line(StartCoord::headX + Place::Type + i, StartCoord::headY, Console::consoleHeight / 2 - 3, Colors::YELLOW, 2);
-		COORDS(StartCoord::headY, StartCoord::headX + Place::Type + 2 + i);
+		line(StartCoord::headXl + Place::Type + i, StartCoord::headY, Console::consoleHeight / 2 - 3, Colors::YELLOW, 2);
+		COORDS(StartCoord::headY, StartCoord::headXl + Place::Type + 2 + i);
 		cout << "Type";
-		line(StartCoord::headX + Place::Attr + i, StartCoord::headY, Console::consoleHeight / 2 - 3, Colors::YELLOW, 2);
-		COORDS(StartCoord::headY, StartCoord::headX + Place::Attr + 1 + i);
+		line(StartCoord::headXl + Place::Attr + i, StartCoord::headY, Console::consoleHeight / 2 - 3, Colors::YELLOW, 2);
+		COORDS(StartCoord::headY, StartCoord::headXl + Place::Attr + 1 + i);
 		cout << "Attr";
 
 //		line(StartCoord::headX + i, Console::consoleHeight / 2 - 2, Console::consoleHeight / 2, defaultForeGround, 6);
@@ -180,6 +180,12 @@ int Functions::keyWork(int count)
 
 	switch (key)	
 	{
+	case KEY::TAB:
+		this->tab = !this->tab;
+		break;
+	case KEY::F0:
+		this->F0 = true;
+		break;
 	case KEY::F2:
 		this->F2 = true;
 		break;

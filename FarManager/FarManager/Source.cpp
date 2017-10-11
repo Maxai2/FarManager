@@ -17,57 +17,87 @@ void main()
 {
 	Functions f;
 	f.head();
-	f.noCursor(false);
+	f.noCursor(true);
 
-	//FileManager fm("C://*");
-	//FileManager fm("C://Users//Joker//*");
-	//FileManager fm("C://Users//Ali//Desktop//New folder//*");
-	FileManager fm("C://Users//Mahm_iz81//Documents//*");
+	//FileManager fml("C://*");
+	//FileManager fml("C://Users//Joker//*");
+	//FileManager fml("C://Users//Mahm_iz81//Documents//*");
+	FileManager fml("C://Users//Ali//Desktop//New folder//*");
+	FileManager fmr("C://*");
 
 	int temp = 0, realCount = 0; 
+
+	fmr.showDirectory(temp, "show", 'r');
+	fml.showDirectory(temp, "show", 'l');
 
 	while(1)
 	{
 		if (temp > 29)
 		{
-			fm.showDirectory(temp, "show", 'r', fm.getName(temp - 1));
+			fml.showDirectory(temp, "show", 'l', fml.getName(temp - 1));
 			
 		}
 		else
-			fm.showDirectory(temp, "show", 'r'); 
+		{
+			if (f.tab)
+				fmr.showDirectory(temp, "show", 'r');
+			else
+				fml.showDirectory(temp, "show", 'l');
+		}
 
-		temp = f.keyWork(fm.getCount());
+		if (f.tab)
+			temp = f.keyWork(fmr.getCount());
+		else
+			temp = f.keyWork(fml.getCount());
 
 		if (f.enter)
 		{
-			fm.changeDirectory(fm.getName(temp));
-			fm.showDirectory(temp, "clear", 'r');
+			if (f.tab)
+			{
+				fmr.changeDirectory(fmr.getName(temp));
+
+				if (fmr.getName(0) != ".")
+					fmr.showDirectory(temp, "clear", 'r', fmr.getName(0));
+				else
+					fmr.showDirectory(temp, "clear", 'r');
+			}
+			else
+			{
+				fml.changeDirectory(fml.getName(temp));
+
+				if (fml.getName(0) != ".")
+					fml.showDirectory(temp, "clear", 'l', fml.getName(0));
+				else
+					fml.showDirectory(temp, "clear", 'l');
+			}
+
 			temp = 0; f.sel = 0; f.enter = false;
 		}
+		else
+		if (f.F0) exit(0);
 		else
 		if (f.F2)
 		{
 			f.noCursor(true);
-			fm.changeName(temp);
+			fml.changeName(temp);
 			f.noCursor(false);
 			f.F2 = false;
 		}
 		else
 		if (f.F5)
 		{
-			f.noCursor(true);
-			fm.copyName(temp);
-			f.noCursor(false);
+			//fml.showDirectory(temp, "show", 'r');
 			f.F5 = false;
 		}
 		else
 		if (f.F7)
 		{
 			f.noCursor(true);
-			fm.makedir();
+			fml.makedir();
 			f.noCursor(false);
 			f.F7 = false;
 		}
+
 	}
 
 	system("pause");

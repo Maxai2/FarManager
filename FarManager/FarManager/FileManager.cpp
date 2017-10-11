@@ -27,7 +27,7 @@ void FileManager::pathModif(string path)
 
 void FileManager::clearPathPlace()
 {
-	for (int i = 0; i < Console::consoleWidth; i++)
+	for (int i = 0; i < Console::consoleWidth / 2; i++)
 		cout << " ";
 }
 
@@ -80,10 +80,10 @@ void FileManager::showDirectory(int sel, string mode, char rightLeft, string exc
 			if (this->count > 29)
 				break;
 			else
-				rightLeft == 'l' ? COORDS((short)this->count + 2, 76) : COORDS((short)this->count + 2, 1);
+				rightLeft == 'r' ? COORDS((short)this->count + 2, 76) : COORDS((short)this->count + 2, 1);
 
 			if (this->newFolder) clear("name");
-			rightLeft == 'l' ? COORDS((short)this->count + 2, 76) : COORDS((short)this->count + 2, 1);
+			rightLeft == 'r' ? COORDS((short)this->count + 2, 76) : COORDS((short)this->count + 2, 1);
 
 			if (this->count == sel)
 				check = true;
@@ -129,13 +129,13 @@ void FileManager::showDirectory(int sel, string mode, char rightLeft, string exc
 				cout << fileinfo.name << '\n';
 
 			int size = fileinfo.size;
-			rightLeft == 'l' ? COORDS((short)this->count + 2, 76 + Place::Size + 1) : COORDS((short)this->count + 2, Place::Size + 2);
+			rightLeft == 'r' ? COORDS((short)this->count + 2, 76 + Place::Size + 1) : COORDS((short)this->count + 2, Place::Size + 2);
 			if (size == 0)
 				cout << "Folder";
 			else
 				BytesConv(fileinfo.size);
 
-			rightLeft == 'l' ? COORDS((short)this->count + 2, 76 + Place::Type + 1) : COORDS((short)this->count + 2, Place::Type + 2);
+			rightLeft == 'r' ? COORDS((short)this->count + 2, 76 + Place::Type + 1) : COORDS((short)this->count + 2, Place::Type + 2);
 			if (fileinfo.attrib & _A_SUBDIR)
 			{
 				if (fileinfo.name != "..")
@@ -145,7 +145,7 @@ void FileManager::showDirectory(int sel, string mode, char rightLeft, string exc
 			}
 			else { cout << " File"; fileCount++; }
 
-			rightLeft == 'l' ? COORDS((short)this->count + 2, 76 + Place::Attr + 1) : COORDS((short)this->count + 2, Place::Attr + 2);
+			rightLeft == 'r' ? COORDS((short)this->count + 2, 76 + Place::Attr + 1) : COORDS((short)this->count + 2, Place::Attr + 2);
 			string attr;
 			if (fileinfo.attrib & _A_SYSTEM) attr += "S";
 			if (fileinfo.attrib & _A_NORMAL) attr += "N";
@@ -166,11 +166,17 @@ void FileManager::showDirectory(int sel, string mode, char rightLeft, string exc
 		this->willbe = false; this->newFolder = false;
 
 		COLOR(Colors::GREEN, defaultBackGround);
-		COORDS(33, StartCoord::headX);
-		cout << "\t\tFolders count: " << folderCount - 1 << ", files count: " << fileCount;
-		COORDS(35, StartCoord::headX);
+
+		rightLeft == 'r' ? COORDS(33, StartCoord::headXr) : COORDS(33, StartCoord::headXl);
+		cout << "\t\tFolders count: ";
+		if (getName(0) != "..")
+			cout << folderCount;
+		else cout << --folderCount;
+
+		cout << ", files count: " << fileCount;
+		rightLeft == 'r' ? COORDS(35, StartCoord::headXr) : COORDS(35, StartCoord::headXl);
 		clearPathPlace();
-		COORDS(35, StartCoord::headX);
+		rightLeft == 'r' ? COORDS(35, StartCoord::headXr) : COORDS(35, StartCoord::headXl);
 		pathModif(this->path);
 	
 		COLOR(defaultForeGround, defaultBackGround);
@@ -181,28 +187,27 @@ void FileManager::showDirectory(int sel, string mode, char rightLeft, string exc
 		_finddata_t fileinfo;
 		int handle = _findfirst(oldPath.c_str(), &fileinfo);
 		int find = handle;
-		this->count;
 		string tempoldPath = fileinfo.name;
 
 		while (this->count != 0)
 		{
-			if (tempoldPath == ".")
+			if (tempoldPath == exception)
 			{
 				tempoldPath = "";
 				find = _findnext(handle, &fileinfo);
 				continue;
 			}
 
-			COORDS((short)this->count + 2, 1);
+			rightLeft == 'r' ? COORDS((short)this->count + 2, 76) : COORDS((short)this->count + 2, 1);
 			clear("name");
 
-			COORDS((short)this->count + 2, Place::Size + 2);
+			rightLeft == 'r' ? COORDS((short)this->count + 2, 76 + Place::Size + 1) : COORDS((short)this->count + 2, Place::Size + 2);
 			clear("size");
 
-			COORDS((short)this->count + 2, Place::Type + 2);
+			rightLeft == 'r' ? COORDS((short)this->count + 2, 76 + Place::Size + 1) : COORDS((short)this->count + 2, Place::Type + 2);
 			clear("type");
 
-			COORDS((short)this->count + 2, Place::Attr + 2);
+			rightLeft == 'r' ? COORDS((short)this->count + 2, 76 + Place::Size + 1) : COORDS((short)this->count + 2, Place::Attr + 2);
 			clear("attr");
 
 			directory.pop_back();
@@ -285,6 +290,7 @@ void FileManager::copyName(int sel)
 	{
 		showDirectory(sel, "show", 'l');
 		
+
 	}
 	
 }
