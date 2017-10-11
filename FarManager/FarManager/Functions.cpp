@@ -198,6 +198,9 @@ int Functions::keyWork(int count)
 	case KEY::UP:
 		if (sel > 0)
 			sel--;
+		else
+		if (sel == 0)
+			this->EndPlusOne--;
 		break;
 	case KEY::RIGHT:
 		sel = count - 1;
@@ -205,6 +208,9 @@ int Functions::keyWork(int count)
 	case KEY::DOWN:
 		if (sel < count - 1)
 			sel++;
+		else
+		if (sel >= count - 1 && sel < realCount)
+			this->EndPlusOne++;
 		break;
 	case KEY::LEFT:
 		sel = 0;

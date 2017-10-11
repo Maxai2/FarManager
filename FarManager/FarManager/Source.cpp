@@ -17,28 +17,47 @@ void main()
 {
 	Functions f;
 	f.head();
-	f.noCursor(true);
+	f.noCursor(false);
 
 	//FileManager fml("C://*");
 	//FileManager fml("C://Users//Joker//*");
-	//FileManager fml("C://Users//Mahm_iz81//Documents//*");
-	FileManager fml("C://Users//Ali//Desktop//New folder//*");
-	FileManager fmr("C://*");
+	FileManager fmr("C://Users//Mahm_iz81//Documents//*");
+	//FileManager fml("C://Users//Ali//Desktop//New folder//*");
+	FileManager fml("C://Windows//*");
 
-	int temp = 0, realCount = 0; 
+	int temp = 0; 
 
 	fmr.showDirectory(temp, "show", 'r');
 	fml.showDirectory(temp, "show", 'l');
 
 	while(1)
 	{
-		if (temp > 29)
+		if (temp >= 29)
 		{
-			fml.showDirectory(temp, "show", 'l', fml.getName(temp - 1));
-			
+			fmr.list = true;
+			if (f.tab)
+			{
+				if (fmr.getName(0) != ".")
+					fmr.showDirectory(temp, "clear", 'r');
+				else
+					fmr.showDirectory(temp, "clear", 'r', fmr.getName(0));
+
+				//f.list(fmr.getPath(), fmr.directory, f.EndPlusOne);
+				fml.showDirectory(temp, "list", 'l', fml.getName(temp - 1));
+			}
+			else
+			{
+				if (fml.getName(0) != ".")
+					fml.showDirectory(temp, "clear", 'l');
+				else
+					fml.showDirectory(temp, "clear", 'l', fml.getName(0));
+
+				fml.showDirectory(temp, "list", 'l', fml.getName(temp - 1), f.EndPlusOne);
+			}
 		}
 		else
 		{
+			fml.list = false;
 			if (f.tab)
 				fmr.showDirectory(temp, "show", 'r');
 			else
@@ -46,9 +65,15 @@ void main()
 		}
 
 		if (f.tab)
+		{
 			temp = f.keyWork(fmr.getCount());
+			f.realCount = fmr.dirCount(fmr.getPath());
+		}
 		else
+		{
 			temp = f.keyWork(fml.getCount());
+			f.realCount = fml.dirCount(fml.getPath());
+		}
 
 		if (f.enter)
 		{
@@ -79,14 +104,20 @@ void main()
 		if (f.F2)
 		{
 			f.noCursor(true);
-			fml.changeName(temp);
+			if (f.tab)
+				fmr.changeName(temp);
+			else
+				fml.changeName(temp);
 			f.noCursor(false);
 			f.F2 = false;
 		}
 		else
 		if (f.F5)
 		{
-			//fml.showDirectory(temp, "show", 'r');
+			if (f.tab)
+				fmr.copyName();
+			else
+				fml.copyName();
 			f.F5 = false;
 		}
 		else
@@ -97,7 +128,6 @@ void main()
 			f.noCursor(false);
 			f.F7 = false;
 		}
-
 	}
 
 	system("pause");

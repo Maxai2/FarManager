@@ -18,7 +18,6 @@ class FileManager
 	string oldPath;
 	bool willbe = true;
 	bool newFolder;
-	vector<string> directory;
 	 
 	int count = 0;
 
@@ -26,6 +25,8 @@ class FileManager
 	void clearPathPlace();
 	int lengthPath(string path);
 public:
+	vector<string> directory;
+	bool list = false;
 	FileManager(string path); 
 
 	int getCount();
@@ -34,11 +35,11 @@ public:
 	friend void clear(string what);
 	int dirCount(string path);
 
-	void showDirectory(int sel, string mode, char rightLeft, string exception = ".");
+	void showDirectory(int sel, string mode, char rightLeft, string exception = ".", int EndPlusOne = 0);
 	void changeDirectory(string dir);
 	void makedir();
 	void changeName(int num);
-	void copyName(int sel);
+	void copyName();
 	//void remove(string path);
 	//void move();
 	//void findFiles(string mask);

@@ -80,7 +80,7 @@ enum Place
 
 #define defaultForeGround Colors::GREY
 #define defaultBackGround Colors::DARKBLUE
-
+#define maxFolderCount 29
 
 #define COLOR(foreground, background) SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), background * 16 + foreground)
 #define COORDS(row, col) SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { (short)col, (short)row })
@@ -96,8 +96,9 @@ class Functions
 	void frame();
 	void background();
 	friend bool frac(float num);
-
 public:
+	int realCount = 0;
+	int EndPlusOne = 0;
 	int sel = 0;
 	bool enter = false;
 	bool tab = false;
