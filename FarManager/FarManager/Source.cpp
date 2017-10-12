@@ -20,10 +20,11 @@ void main()
 	f.noCursor(false);
 
 	//FileManager fml("C://*");
-	//FileManager fml("C://Users//Joker//*");
-	FileManager fmr("C://Users//Mahm_iz81//Documents//*");
+	FileManager fml("D://Joker//Documents//*");
+	//FileManager fmr("C://Users//Mahm_iz81//Documents//*");
 	//FileManager fml("C://Users//Ali//Desktop//New folder//*");
-	FileManager fml("C://Windows//*");
+	//FileManager fml("C://Windows//*");
+	FileManager fmr("D://Joker//Desktop//*");
 
 	int temp = 0; 
 
@@ -42,7 +43,6 @@ void main()
 				else
 					fmr.showDirectory(temp, "clear", 'r', fmr.getName(0));
 
-				//f.list(fmr.getPath(), fmr.directory, f.EndPlusOne);
 				fml.showDirectory(temp, "list", 'l', fml.getName(temp - 1));
 			}
 			else
@@ -75,6 +75,8 @@ void main()
 			f.realCount = fml.dirCount(fml.getPath());
 		}
 
+//-----------------------------------------------------------------------------------------
+
 		if (f.enter)
 		{
 			if (f.tab)
@@ -99,9 +101,9 @@ void main()
 			temp = 0; f.sel = 0; f.enter = false;
 		}
 		else
-		if (f.F0) exit(0);
+		if (f.F0) exit(0); // exit
 		else
-		if (f.F2)
+		if (f.F2) // rename
 		{
 			f.noCursor(true);
 			if (f.tab)
@@ -112,21 +114,85 @@ void main()
 			f.F2 = false;
 		}
 		else
-		if (f.F5)
+		if (f.F3) // viewe
+		{
+			int key = 0;
+			system("cls");
+			COLOR(Colors::BLACK, Colors::DARKCYAN);
+			if (f.tab)
+			{
+				fmr.pathModif(fmr.getPath());
+				f.showContain(fmr.getPath(), fmr.getName(temp));
+			}
+			else
+			{
+				fml.pathModif(fml.getPath());
+				f.showContain(fml.getPath(), fml.getName(temp));
+			}
+
+			while (key != 27)
+			{
+				key = _getch();
+			}
+
+			f.F3 = false;
+			f.head();
+
+			f.tab ? fml.showDirectory(temp, "show", 'l') : fmr.showDirectory(temp, "show", 'r');
+		}
+		else
+		if (f.F5) // copy
 		{
 			if (f.tab)
-				fmr.copyName();
+			{
+				fmr.copyName(fmr.getPath(), fml.getPath(), fmr.getName(temp));
+				fmr.showDirectory(temp, "clear", 'l');
+			}
 			else
-				fml.copyName();
+			{
+				fml.copyName(fml.getPath(), fmr.getPath(), fml.getName(temp));
+				fml.showDirectory(temp, "clear", 'r');
+			}
 			f.F5 = false;
 		}
 		else
-		if (f.F7)
+		if (f.F6) // move
+		{
+			if (f.tab)
+				fmr.move(fmr.getPath(), fml.getPath(), fmr.getName(temp));
+			else
+				fml.move(fml.getPath(), fmr.getPath(), fml.getName(temp));
+
+			fml.showDirectory(temp, "clear", 'l');
+			fmr.showDirectory(temp, "clear", 'r');
+			f.F6 = false;
+		}
+		else
+		if (f.F7) // makedir
 		{
 			f.noCursor(true);
-			fml.makedir();
+			if (f.tab)
+				fmr.makedir();
+			else
+				fml.makedir();
+
 			f.noCursor(false);
 			f.F7 = false;
+		}
+		else
+		if (f.F8) // delete
+		{
+			if (f.tab)
+			{
+				fmr.removeFile(fmr.getPath(), fmr.getName(temp));
+				fmr.showDirectory(0, "clear", 'r');
+			}
+			else
+			{
+				fml.removeFile(fml.getPath(), fml.getName(temp));
+				fml.showDirectory(0, "clear", 'l');
+			}
+			f.F8 = false;
 		}
 	}
 

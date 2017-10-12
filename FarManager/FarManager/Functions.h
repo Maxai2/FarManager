@@ -104,8 +104,11 @@ public:
 	bool tab = false;
 	bool F0 = false;
 	bool F2 = false;
+	bool F3 = false;
 	bool F5 = false;
+	bool F6 = false;
 	bool F7 = false;
+	bool F8 = false;
 
 	Functions();
 	~Functions();
@@ -113,4 +116,5 @@ public:
 	friend void BytesConv(float size);
 	int keyWork(int count);
 	void noCursor(bool visible);
+	void showContain(string path, string name);
 };

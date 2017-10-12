@@ -5,6 +5,7 @@
 #include <io.h>
 #include <vector>
 #include <iomanip>
+#include <fstream>
 
 #include "Functions.h"
 
@@ -21,14 +22,15 @@ class FileManager
 	 
 	int count = 0;
 
-	void pathModif(string path);
 	void clearPathPlace();
 	int lengthPath(string path);
 public:
 	vector<string> directory;
 	bool list = false;
+	bool refresh = false;
 	FileManager(string path); 
 
+	void pathModif(string path);
 	int getCount();
 	string getName(int sel);
 	string getPath();
@@ -39,9 +41,9 @@ public:
 	void changeDirectory(string dir);
 	void makedir();
 	void changeName(int num);
-	void copyName();
-	//void remove(string path);
-	//void move();
+	void copyName(string from, string to, string name);
+	void removeFile(string path, string name);
+	void move(string from, string to, string name);
 	//void findFiles(string mask);
 };
 

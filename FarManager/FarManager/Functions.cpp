@@ -189,11 +189,20 @@ int Functions::keyWork(int count)
 	case KEY::F2:
 		this->F2 = true;
 		break;
+	case KEY::F3:
+		this->F3 = true;
+		break;
 	case KEY::F5:
 		this->F5 = true;
 		break;
+	case KEY::F6:
+		this->F6 = true;
+		break;
 	case KEY::F7:
 		this->F7 = true;
+		break;
+	case KEY::F8:
+		this->F8 = true;
 		break;
 	case KEY::UP:
 		if (sel > 0)
@@ -233,6 +242,28 @@ void Functions::noCursor(bool visible)
 	GetConsoleCursorInfo(out, &cursorInfo);
 	cursorInfo.bVisible = visible; // set the cursor visibility
 	SetConsoleCursorInfo(out, &cursorInfo);
+}
+
+//--------------------------------------------------------------------------------------------------------
+
+void Functions::showContain(string path, string name)
+{
+	cout << name;
+	path.erase(path.end() - 1);
+	string buffer;
+	buffer = path + name;
+
+	ifstream fin(buffer);
+	string str;
+
+	COLOR(Colors::CYAN, defaultBackGround);
+	cout << endl;
+	while (fin)
+	{
+		getline(fin, str);
+		cout << str;
+	}
+	fin.close();
 }
 
 //--------------------------------------------------------------------------------------------------------

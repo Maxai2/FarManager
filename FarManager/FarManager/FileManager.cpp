@@ -211,7 +211,7 @@ void FileManager::showDirectory(int sel, string mode, char rightLeft, string exc
 			rightLeft == 'r' ? COORDS((short)this->count + 2, 76 + Place::Attr + 1) : COORDS((short)this->count + 2, Place::Attr + 2);
 			clear("attr");
 
-			if (this->list == false)
+			if (this->refresh == true)
 				directory.pop_back();
 
 			this->count--;
@@ -376,11 +376,59 @@ void FileManager::changeName(int num)
 }
 
 //--------------------------------------------------------------------------------------------------------
-
-void FileManager::copyName()
+void FileManager::copyName(string from, string to, string name)
 {
-	
-	
+	from.erase(from.end() - 1);
+	to.erase(to.end() - 1);
+	string sourcePath, copyPath;
+	sourcePath = from + name;
+	copyPath = to + name;
+
+	ifstream source(sourcePath, ios::binary);
+	ofstream copy(copyPath, ios::binary);
+	string buffer;
+	while (source)
+	{
+		getline(source, buffer);
+		copy << buffer << endl;
+	}
+	source.close();
+	copy.close();
+}
+
+//--------------------------------------------------------------------------------------------------------
+
+void FileManager::removeFile(string path, string name)
+{
+	path.erase(path.end() - 1);
+	string buffer;
+	buffer = path + name;
+
+	remove(buffer.c_str());
+}
+
+//--------------------------------------------------------------------------------------------------------
+
+void FileManager::move(string from, string to, string name)
+{
+	from.erase(from.end() - 1);
+	to.erase(to.end() - 1);
+	string sourcePath, movePath;
+	sourcePath = from + name;
+	movePath = to + name;
+
+	ifstream sourcePlace(sourcePath, ios::binary);
+	ofstream movePlace(movePath, ios::binary);
+	string buffer;
+	while (sourcePlace)
+	{
+		getline(sourcePlace, buffer);
+		movePlace << buffer << endl;
+	}
+	sourcePlace.close();
+	movePlace.close();
+
+	remove(sourcePath.c_str());
 }
 
 //--------------------------------------------------------------------------------------------------------
