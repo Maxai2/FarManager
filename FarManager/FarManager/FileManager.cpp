@@ -433,6 +433,13 @@ void FileManager::move(string from, string to, string name)
 
 //--------------------------------------------------------------------------------------------------------
 
+void FileManager::findFiles(string mask)
+{
+	
+}
+
+//--------------------------------------------------------------------------------------------------------
+
 void clear(string what)
 {
 	COLOR(defaultForeGround, defaultBackGround);

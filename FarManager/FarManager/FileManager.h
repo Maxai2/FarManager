@@ -44,7 +44,7 @@ public:
 	void copyName(string from, string to, string name);
 	void removeFile(string path, string name);
 	void move(string from, string to, string name);
-	//void findFiles(string mask);
+	void findFiles(string mask);
 };
 
 //--------------------------------------------------------------------------------------------------------
