@@ -192,6 +192,9 @@ int Functions::keyWork(int count)
 	case KEY::F3:
 		this->F3 = true;
 		break;
+	case KEY::F4:
+		this->F4 = true;
+		break;
 	case KEY::F5:
 		this->F5 = true;
 		break;
@@ -261,7 +264,7 @@ void Functions::showContain(string path, string name)
 	while (fin)
 	{
 		getline(fin, str);
-		cout << str;
+		cout << str << endl;
 	}
 	fin.close();
 }

@@ -81,21 +81,25 @@ void main()
 		{
 			if (f.tab)
 			{
+				fmr.notRefresh = true;
 				fmr.changeDirectory(fmr.getName(temp));
 
 				if (fmr.getName(0) != ".")
 					fmr.showDirectory(temp, "clear", 'r', fmr.getName(0));
 				else
 					fmr.showDirectory(temp, "clear", 'r');
+				fmr.notRefresh = false;
 			}
 			else
 			{
+				fml.notRefresh = true;
 				fml.changeDirectory(fml.getName(temp));
 
 				if (fml.getName(0) != ".")
 					fml.showDirectory(temp, "clear", 'l', fml.getName(0));
 				else
 					fml.showDirectory(temp, "clear", 'l');
+				fml.notRefresh = false;
 			}
 
 			temp = 0; f.sel = 0; f.enter = false;
@@ -139,6 +143,35 @@ void main()
 			f.head();
 
 			f.tab ? fml.showDirectory(temp, "show", 'l') : fmr.showDirectory(temp, "show", 'r');
+		}
+		else
+		if (f.F4) // find
+		{
+			int key = 0;
+			system("cls");
+			string mask;
+
+			COORDS(35, f);
+
+			if (f.tab)
+			{
+				getline(cin, mask);
+				fmr.findFiles(fmr.getPath(), fmr.getName(temp));
+			}
+			else
+			{
+				fml.findFiles(fml.getPath(), fml.getName(temp));
+			}
+
+			while (key != 27)
+			{
+				key = _getch();
+			}
+
+			f.F4 = false;
+			f.head();
+
+			f.tab ? fml.showDirectory(temp, "show", 'l') : fmr.showDirectory(temp, "show", 'r'); 
 		}
 		else
 		if (f.F5) // copy

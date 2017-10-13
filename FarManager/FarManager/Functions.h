@@ -105,6 +105,7 @@ public:
 	bool F0 = false;
 	bool F2 = false;
 	bool F3 = false;
+	bool F4 = false;
 	bool F5 = false;
 	bool F6 = false;
 	bool F7 = false;

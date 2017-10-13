@@ -27,7 +27,7 @@ class FileManager
 public:
 	vector<string> directory;
 	bool list = false;
-	bool refresh = false;
+	bool notRefresh = false;
 	FileManager(string path); 
 
 	void pathModif(string path);
@@ -44,7 +44,7 @@ public:
 	void copyName(string from, string to, string name);
 	void removeFile(string path, string name);
 	void move(string from, string to, string name);
-	void findFiles(string mask);
+	void findFiles(string path, string name);
 };
 
 //--------------------------------------------------------------------------------------------------------

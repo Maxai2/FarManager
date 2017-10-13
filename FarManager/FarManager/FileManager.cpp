@@ -211,7 +211,7 @@ void FileManager::showDirectory(int sel, string mode, char rightLeft, string exc
 			rightLeft == 'r' ? COORDS((short)this->count + 2, 76 + Place::Attr + 1) : COORDS((short)this->count + 2, Place::Attr + 2);
 			clear("attr");
 
-			if (this->refresh == true)
+			if (this->notRefresh)
 				directory.pop_back();
 
 			this->count--;
@@ -433,9 +433,26 @@ void FileManager::move(string from, string to, string name)
 
 //--------------------------------------------------------------------------------------------------------
 
-void FileManager::findFiles(string mask)
+void FileManager::findFiles(string path, string name)
 {
-	
+	if (mask[0] == '*' && mask[mask.size() - 1] == '*')
+	{
+
+	}
+	else
+	if (mask[0] == '*')
+	{
+
+	}
+	else
+	if (mask[mask.size() - 1] == '*')
+	{
+
+	}
+	else
+	{
+
+	}
 }
 
 //--------------------------------------------------------------------------------------------------------
