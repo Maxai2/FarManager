@@ -13,19 +13,19 @@ Functions::~Functions()
 
 //--------------------------------------------------------------------------------------------------------
 
-bool Functions::getTab() { return this->tab; }
+//bool Functions::getTab() { return this->tab; }
 
 //--------------------------------------------------------------------------------------------------------
 
-bool Functions::getEnter() { return this->enter; }
+//bool Functions::getEnter() { return this->enter; }
 
 //--------------------------------------------------------------------------------------------------------
 
-void Functions::setEnter(bool val) { this->enter = val; }
+//void Functions::setEnter(bool val) { this->enter = val; }
 
 //--------------------------------------------------------------------------------------------------------
 
-bool Functions::getF0() { return this->F0; }
+//bool Functions::getF0() { return this->F0; }
 
 //--------------------------------------------------------------------------------------------------------
 

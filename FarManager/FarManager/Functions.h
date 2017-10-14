@@ -92,6 +92,13 @@ class Functions
 {
 	int realCount = 0;
 	int EndPlusOne = 0;
+
+	void line(int x, int y, int length, Colors color, int direction); 
+	void square();
+	void frame();
+	void background();
+	friend bool frac(float num);
+public:
 	int sel = 0;
 	bool tab = false;
 	bool enter = false;
@@ -103,33 +110,26 @@ class Functions
 	bool F6 = false;
 	bool F7 = false;
 	bool F8 = false;
-
-	void line(int x, int y, int length, Colors color, int direction); 
-	void square();
-	void frame();
-	void background();
-	friend bool frac(float num);
-public:
 	Functions();
 	~Functions();
 
-	bool getTab();
-	bool getEnter();
-	void setEnter(bool val);
-	bool getF0();
-	void setF0(bool val);
-	bool getF2();
-	void setF2(bool val);
-	bool getF3();
-	void setF3(bool val);
-	bool getF4();
-	void setF4(bool val);
-	bool getF5();
-	void setF5(bool val);
-	bool getF6();
-	void setF6(bool val);
-	bool getF8();
-	void setF8(bool val);
+//	bool getTab();
+//	bool getEnter();
+//	void setEnter(bool val);
+//	bool getF0();
+//	void setF0(bool val);
+//	bool getF2();
+//	void setF2(bool val);
+//	bool getF3();
+//	void setF3(bool val);
+//	bool getF4();
+//	void setF4(bool val);
+//	bool getF5();
+//	void setF5(bool val);
+//	bool getF6();
+//	void setF6(bool val);
+//	bool getF8();
+//	void setF8(bool val);
 
 
 

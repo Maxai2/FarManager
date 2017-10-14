@@ -53,15 +53,57 @@ int FileManager::dirCount(string path)
 }
 
 //--------------------------------------------------------------------------------------------------------
+string includeEndSlash(string path)
+{
+	if (path[path.length - 1] != '\\')
+		path += '\\';
+
+	return path;
+}
+//--------------------------------------------------------------------------------------------------------
+string excludeEndSlash(string path)
+{
+	if (path[path.length - 1] == '\\')
+		path.erase(path.end() - 1);
+
+	return path;
+}
+//--------------------------------------------------------------------------------------------------------
+void getDirectory(vector<F_INFO> &files, string path)
+{
+	files.clear;
+	_finddata_t fileinfo;
+	int done = _findfirst((includeEndSlash(path) + "*").c_str(), &fileinfo);
+
+	while (!done)
+	{
+		if (fileinfo.attrib  & _A_SUBDIR && fileinfo.name == ".")
+		{
+			done = _findnext(handle, &fileinfo);
+			continue;
+		}
+
+
+		F_INFO *f = new F_INFO;
+
+	
+
+		files.push_back(f);
+
+		done = _findnext(handle, &fileinfo);
+	}
+
+}
 
 void FileManager::showDirectory(int sel, string mode, char rightLeft, string exception, int EndPlusOne)
 {
 	if (mode == "show")
 	{
-		bool check = false;
-		string buffer, temppath;
 		_finddata_t fileinfo;
 		int handle = _findfirst(path.c_str(), &fileinfo);
+
+		bool check = false;
+		string buffer, temppath;
 		this->oldPath = this->path;
 		int find = handle;
 		int folderCount = 0, fileCount = 0;
@@ -435,21 +477,21 @@ void FileManager::move(string from, string to, string name)
 
 void FileManager::findFiles(string path, string name)
 {
-	if (mask[0] == '*' && mask[mask.size() - 1] == '*')
+//	if (mask[0] == '*' && mask[mask.size() - 1] == '*')
 	{
 
 	}
-	else
-	if (mask[0] == '*')
+//	else
+//	if (mask[0] == '*')
 	{
 
 	}
-	else
-	if (mask[mask.size() - 1] == '*')
+//	else
+//	if (mask[mask.size() - 1] == '*')
 	{
 
 	}
-	else
+//	else
 	{
 
 	}
