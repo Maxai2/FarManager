@@ -36,7 +36,7 @@ void main()
 		if (temp >= 29)
 		{
 			fmr.list = true;
-			if (f.tab)
+			if (f.getTab())
 			{
 				if (fmr.getName(0) != ".")
 					fmr.showDirectory(temp, "clear", 'r');
@@ -52,34 +52,34 @@ void main()
 				else
 					fml.showDirectory(temp, "clear", 'l', fml.getName(0));
 
-				fml.showDirectory(temp, "list", 'l', fml.getName(temp - 1), f.EndPlusOne);
+				//fml.showDirectory(temp, "list", 'l', fml.getName(temp - 1), f.EndPlusOne);
 			}
 		}
 		else
 		{
 			fml.list = false;
-			if (f.tab)
+			if (f.getTab())
 				fmr.showDirectory(temp, "show", 'r');
 			else
 				fml.showDirectory(temp, "show", 'l');
 		}
 
-		if (f.tab)
+		if (f.getTab())
 		{
 			temp = f.keyWork(fmr.getCount());
-			f.realCount = fmr.dirCount(fmr.getPath());
+			//f.realCount = fmr.dirCount(fmr.getPath());
 		}
 		else
 		{
 			temp = f.keyWork(fml.getCount());
-			f.realCount = fml.dirCount(fml.getPath());
+			//f.realCount = fml.dirCount(fml.getPath());
 		}
 
 //-----------------------------------------------------------------------------------------
 
 		if (f.enter)
 		{
-			if (f.tab)
+			if (f.getTab())
 			{
 				fmr.notRefresh = true;
 				fmr.changeDirectory(fmr.getName(temp));
@@ -110,7 +110,7 @@ void main()
 		if (f.F2) // rename
 		{
 			f.noCursor(true);
-			if (f.tab)
+			if (f.getTab())
 				fmr.changeName(temp);
 			else
 				fml.changeName(temp);
@@ -123,7 +123,7 @@ void main()
 			int key = 0;
 			system("cls");
 			COLOR(Colors::BLACK, Colors::DARKCYAN);
-			if (f.tab)
+			if (f.getTab())
 			{
 				fmr.pathModif(fmr.getPath());
 				f.showContain(fmr.getPath(), fmr.getName(temp));
@@ -142,7 +142,7 @@ void main()
 			f.F3 = false;
 			f.head();
 
-			f.tab ? fml.showDirectory(temp, "show", 'l') : fmr.showDirectory(temp, "show", 'r');
+			f.getTab() ? fml.showDirectory(temp, "show", 'l') : fmr.showDirectory(temp, "show", 'r');
 		}
 		else
 		if (f.F4) // find
@@ -153,7 +153,7 @@ void main()
 
 			COORDS(35, f);
 
-			if (f.tab)
+			if (f.getTab())
 			{
 				getline(cin, mask);
 				fmr.findFiles(fmr.getPath(), fmr.getName(temp));
@@ -171,12 +171,12 @@ void main()
 			f.F4 = false;
 			f.head();
 
-			f.tab ? fml.showDirectory(temp, "show", 'l') : fmr.showDirectory(temp, "show", 'r'); 
+			f.getTab() ? fml.showDirectory(temp, "show", 'l') : fmr.showDirectory(temp, "show", 'r'); 
 		}
 		else
 		if (f.F5) // copy
 		{
-			if (f.tab)
+			if (f.getTab())
 			{
 				fmr.copyName(fmr.getPath(), fml.getPath(), fmr.getName(temp));
 				fmr.showDirectory(temp, "clear", 'l');
@@ -191,7 +191,7 @@ void main()
 		else
 		if (f.F6) // move
 		{
-			if (f.tab)
+			if (f.getTab())
 				fmr.move(fmr.getPath(), fml.getPath(), fmr.getName(temp));
 			else
 				fml.move(fml.getPath(), fmr.getPath(), fml.getName(temp));
@@ -204,7 +204,7 @@ void main()
 		if (f.F7) // makedir
 		{
 			f.noCursor(true);
-			if (f.tab)
+			if (f.getTab())
 				fmr.makedir();
 			else
 				fml.makedir();
@@ -215,7 +215,7 @@ void main()
 		else
 		if (f.F8) // delete
 		{
-			if (f.tab)
+			if (f.getTab())
 			{
 				fmr.removeFile(fmr.getPath(), fmr.getName(temp));
 				fmr.showDirectory(0, "clear", 'r');

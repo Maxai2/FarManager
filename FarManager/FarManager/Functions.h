@@ -90,18 +90,11 @@ enum Place
 
 class Functions
 {
-
-	void line(int x, int y, int length, Colors color, int direction); 
-	void square();
-	void frame();
-	void background();
-	friend bool frac(float num);
-public:
 	int realCount = 0;
 	int EndPlusOne = 0;
 	int sel = 0;
-	bool enter = false;
 	bool tab = false;
+	bool enter = false;
 	bool F0 = false;
 	bool F2 = false;
 	bool F3 = false;
@@ -111,8 +104,35 @@ public:
 	bool F7 = false;
 	bool F8 = false;
 
+	void line(int x, int y, int length, Colors color, int direction); 
+	void square();
+	void frame();
+	void background();
+	friend bool frac(float num);
+public:
 	Functions();
 	~Functions();
+
+	bool getTab();
+	bool getEnter();
+	void setEnter(bool val);
+	bool getF0();
+	void setF0(bool val);
+	bool getF2();
+	void setF2(bool val);
+	bool getF3();
+	void setF3(bool val);
+	bool getF4();
+	void setF4(bool val);
+	bool getF5();
+	void setF5(bool val);
+	bool getF6();
+	void setF6(bool val);
+	bool getF8();
+	void setF8(bool val);
+
+
+
 	void head();
 	friend void BytesConv(float size);
 	int keyWork(int count);
