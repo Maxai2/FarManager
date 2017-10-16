@@ -82,13 +82,14 @@ void main()
 
 		if (f.enter)
 		{
+			//f.noCursor(true);
 			if (f.tab)
 			{
 				fmr.notRefresh = true;
 				fmr.changeDirectory(fmr.getName(temp));
 
 				if (fmr.getName(0) != ".")
-					fmr.showDirectory(temp, "clear", 'r', fmr.getName(0));
+					fmr.showDirectory(temp, "clear", 'r', "no exception");
 				else
 					fmr.showDirectory(temp, "clear", 'r');
 				fmr.notRefresh = false;
@@ -99,13 +100,13 @@ void main()
 				fml.changeDirectory(fml.getName(temp));
 
 				if (fml.getName(0) != ".")
-					fml.showDirectory(temp, "clear", 'l', fml.getName(0));
+					fml.showDirectory(temp, "clear", 'l', "no exception");
 				else
 					fml.showDirectory(temp, "clear", 'l');
 				fml.notRefresh = false;
 			}
 
-			temp = 0; f.sel = 0; f.enter = false;
+			temp = 0; f.sel = 0; f.enter = false; 
 		}
 		else
 		if (f.F0) exit(0); // exit
@@ -114,9 +115,9 @@ void main()
 		{
 			f.noCursor(true);
 			if (f.tab)
-				fmr.changeName(temp);
+				fmr.changeName(temp, 'r');
 			else
-				fml.changeName(temp);
+				fml.changeName(temp, 'l');
 			f.noCursor(false);
 			f.F2 = false;
 		}
@@ -138,9 +139,7 @@ void main()
 			}
 
 			while (key != 27)
-			{
 				key = _getch();
-			}
 
 			f.F3 = false;
 			f.head();
@@ -151,25 +150,24 @@ void main()
 		if (f.F4) // find
 		{
 			int key = 0;
-			system("cls");
+			//system("cls");
 			string mask;
-
-			//COORDS(35, f);
 
 			if (f.tab)
 			{
+				COORDS(35, fmr.lengthPath(fmr.getPath()));
 				getline(cin, mask);
 				fmr.findFiles(fmr.getPath(), fmr.getName(temp));
 			}
 			else
 			{
+				COORDS(35, fml.lengthPath(fml.getPath()));
+				getline(cin, mask);
 				fml.findFiles(fml.getPath(), fml.getName(temp));
 			}
 
 			while (key != 27)
-			{
 				key = _getch();
-			}
 
 			f.F4 = false;
 			f.head();
@@ -182,12 +180,14 @@ void main()
 			if (f.tab)
 			{
 				fmr.copyName(fmr.getPath(), fml.getPath(), fmr.getName(temp));
-				fmr.showDirectory(temp, "clear", 'l');
+				fml.showDirectory(temp, "clear", 'l');
+				fml.showDirectory(temp, "show", 'l');
 			}
 			else
 			{
 				fml.copyName(fml.getPath(), fmr.getPath(), fml.getName(temp));
-				fml.showDirectory(temp, "clear", 'r');
+				fmr.showDirectory(temp, "clear", 'r');
+				fmr.showDirectory(temp, "show", 'r');
 			}
 			f.F5 = false;
 		}
@@ -195,12 +195,24 @@ void main()
 		if (f.F6) // move
 		{
 			if (f.tab)
+			{
+				fmr.notRefresh = true;
 				fmr.move(fmr.getPath(), fml.getPath(), fmr.getName(temp));
+				fml.showDirectory(temp, "clear", 'l');
+				fmr.showDirectory(temp, "clear", 'r');
+				fmr.notRefresh = false;
+				fml.showDirectory(0, "show", 'l');
+			}
 			else
+			{
+				fml.notRefresh = true;
 				fml.move(fml.getPath(), fmr.getPath(), fml.getName(temp));
+				fml.showDirectory(temp, "clear", 'l');
+				fmr.showDirectory(temp, "clear", 'r');
+				fml.notRefresh = false;
+				fmr.showDirectory(0, "show", 'r');
+			}
 
-			fml.showDirectory(temp, "clear", 'l');
-			fmr.showDirectory(temp, "clear", 'r');
 			f.F6 = false;
 		}
 		else
@@ -208,9 +220,22 @@ void main()
 		{
 			f.noCursor(true);
 			if (f.tab)
-				fmr.makedir();
+			{
+				fmr.notRefresh = true;
+				fmr.makedir('r');
+				fmr.showDirectory(0, "clear", 'r');
+				fmr.notRefresh = false;
+			}
 			else
-				fml.makedir();
+			{
+				fml.notRefresh = true;
+				fml.makedir('l');
+				fml.showDirectory(0, "clear", 'l');
+				fml.notRefresh = false;
+			}
+
+			//fmr.showDirectory(0, "show", 'r');
+			//fml.showDirectory(0, "show", 'l');
 
 			f.noCursor(false);
 			f.F7 = false;
@@ -220,15 +245,37 @@ void main()
 		{
 			if (f.tab)
 			{
-				fmr.removeFile(fmr.getPath(), fmr.getName(temp));
+				fmr.notRefresh = true;
+				fmr.removeFileFolder(fmr.getPath(), fmr.getName(temp));
+				fmr.showDirectory(0, "clear", 'r');
+				fmr.notRefresh = false;
+			}
+			else
+			{
+				fml.notRefresh = true;
+				fml.removeFileFolder(fml.getPath(), fml.getName(temp));
+				fml.showDirectory(0, "clear", 'l');
+				fml.notRefresh = false;
+			}
+			f.F8 = false;
+		}
+		else
+		if (f.tilde)
+		{
+			if (f.tab)
+			{
+				fmr.notRefresh = true;
+				fmr.changeRoot();
 				fmr.showDirectory(0, "clear", 'r');
 			}
 			else
 			{
-				fml.removeFile(fml.getPath(), fml.getName(temp));
+				fml.notRefresh = true;
+				fml.changeRoot();
 				fml.showDirectory(0, "clear", 'l');
 			}
-			f.F8 = false;
+
+			f.tilde = false;
 		}
 	}
 

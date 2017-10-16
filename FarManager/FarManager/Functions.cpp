@@ -196,6 +196,9 @@ int Functions::keyWork(int count)
 
 	switch (key)	
 	{
+	case KEY::Tilde:
+		this->tilde = true;
+		break;
 	case KEY::TAB:
 		this->tab = !this->tab;
 		break;

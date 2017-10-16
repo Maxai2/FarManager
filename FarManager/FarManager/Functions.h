@@ -37,6 +37,7 @@ enum Colors
 
 enum KEY
 {
+	Tilde = 126,
 	F2 = 50,
 	F3 = 51,
 	F4 = 52,
@@ -100,6 +101,7 @@ class Functions
 	friend bool frac(float num);
 public:
 	int sel = 0;
+	bool tilde = false;
 	bool tab = false;
 	bool enter = false;
 	bool F0 = false;

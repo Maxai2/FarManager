@@ -23,7 +23,6 @@ class FileManager
 	int count = 0;
 
 	void clearPathPlace();
-	int lengthPath(string path);
 public:
 	vector<string> directory;
 	bool list = false;
@@ -36,13 +35,16 @@ public:
 	string getPath();
 	friend void clear(string what);
 	int dirCount(string path);
+	int lengthPath(string path);
+	void changeRoot();
+	bool folderOrNot(string path, string name);
 
 	void showDirectory(int sel, string mode, char rightLeft, string exception = ".", int EndPlusOne = 0);
 	void changeDirectory(string dir);
-	void makedir();
-	void changeName(int num);
+	void makedir(char leftRight);
+	void changeName(int num, char leftRight);
 	void copyName(string from, string to, string name);
-	void removeFile(string path, string name);
+	void removeFileFolder(string path, string name);
 	void move(string from, string to, string name);
 	void findFiles(string path, string name);
 };
